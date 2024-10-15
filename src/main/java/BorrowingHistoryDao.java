@@ -9,7 +9,7 @@ import java.util.List;
 public class BorrowingHistoryDao {
 	private String dburl="jdbc:mysql://localhost:3306/LibTrack";
 	private String dbuname="root";
-	private String dbpassword="CS157A@SJSU";
+	private String dbpassword="Th4ngalang?";
 	private String dbdriver="com.mysql.cj.jdbc.Driver";
 	
 	public void loadDriver(String dbdriver) {

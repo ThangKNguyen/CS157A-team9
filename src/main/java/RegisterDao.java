@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class RegisterDao {
 	private String dburl="jdbc:mysql://localhost:3306/LibTrack";
 	private String dbuname="root";
-	private String dbpassword="CS157A@SJSU";
+	private String dbpassword="Th4ngalang?";
 	private String dbdriver="com.mysql.jdbc.Driver";
 	
 	public void loadDriver(String dbdriver) {
@@ -41,7 +41,7 @@ public class RegisterDao {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDate = currentDate.format(formatter);
 
-		String sql = "insert into Aclan.Members (Name, Email, PhoneNumber, Address, JoinDate) VALUES(?, ?, ?, ?, ?)";
+		String sql = "insert into libtrack.Members (Name, Email, PhoneNumber, Address, JoinDate) VALUES(?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, member.getName());
