@@ -9,7 +9,7 @@ public class RegisterDao {
 	private String dburl="jdbc:mysql://localhost:3306/LibTrack";
 	private String dbuname="root";
 	private String dbpassword="CS157A@SJSU";
-	private String dbdriver="com.mysql.jdbc.Driver";
+	private String dbdriver="com.mysql.cj.jdbc.Driver";
 	
 	public void loadDriver(String dbdriver) {
 		try {
@@ -41,13 +41,13 @@ public class RegisterDao {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDate = currentDate.format(formatter);
 
-		String sql = "insert into Aclan.Members (Name, Email, PhoneNumber, Address, JoinDate) VALUES(?, ?, ?, ?, ?)";
+		String sql = "insert into LibTrack.Members (Name, Email, PhoneNumber, Address, JoinDate) VALUES(?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, member.getName());
-			ps.setString(3, member.getEmail());
-			ps.setString(2, member.getAddress());
-			ps.setString(4, member.getPhone());
+			ps.setString(2, member.getEmail());
+			ps.setString(3, member.getPhone());
+			ps.setString(4, member.getAddress());
 			ps.setString(5, formattedDate);
 			ps.executeUpdate();
 		} catch (SQLException e) {
