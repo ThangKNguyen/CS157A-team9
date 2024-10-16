@@ -1,6 +1,11 @@
+package com.LibTrack.dao;
+
 import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import com.LibTrack.models.Member;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -41,11 +46,12 @@ public class RegisterDao {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDate = currentDate.format(formatter);
 
-		String sql = "insert into LibTrack.Members (Name, Email, PhoneNumber, Address, JoinDate) VALUES(?, ?, ?, ?, ?)";
+		String sql = "insert into LibTrack.Members (Name, Email, Password, PhoneNumber, Address, JoinDate) VALUES(?, ?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, member.getName());
 			ps.setString(2, member.getEmail());
+			ps.setString(3, member.getPassword());
 			ps.setString(3, member.getPhone());
 			ps.setString(4, member.getAddress());
 			ps.setString(5, formattedDate);

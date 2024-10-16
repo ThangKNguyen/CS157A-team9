@@ -1,3 +1,4 @@
+package com.LibTrack.models;
 
 public class BorrowingHistoryItem {
 	private int borrowId;

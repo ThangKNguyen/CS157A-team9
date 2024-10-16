@@ -1,15 +1,13 @@
+package com.LibTrack.models;
 
 public class Member {
-	private String name,email,phone,address;
+	private String name,email,password,phone,address;
 
-	public Member() {
-		super();
-	}
-	
-	public Member(String name, String email, String phone, String address) {
+	public Member(String name, String email, String password, String phone, String address) {
 		super();
 		this.name = name;
 		this.email = email;
+		this.password = password;
 		this.phone = phone;
 		this.address = address;
 	}
@@ -30,6 +28,14 @@ public class Member {
 		this.email = email;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getPhone() {
 		return phone;
 	}
@@ -37,12 +43,13 @@ public class Member {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
+
 	public String getAddress() {
 		return address;
 	}
-	
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
 }
