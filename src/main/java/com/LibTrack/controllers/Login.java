@@ -1,6 +1,5 @@
 package com.LibTrack.controllers;
 
-
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,16 +11,16 @@ import com.LibTrack.dao.MemberDao;
 import com.LibTrack.models.Member;
 
 /**
- * Servlet implementation class Register
+ * Servlet implementation class Login
  */
-@WebServlet("/Register")
-public class Register extends HttpServlet {
+@WebServlet("/Login")
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Register() {
+    public Login() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,17 +37,20 @@ public class Register extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name=request.getParameter("name");
-		String email=request.getParameter("email");
-		String password=request.getParameter("password");
-		String phone=request.getParameter("phone");
-		String address=request.getParameter("address");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		MemberDao memberDao = new MemberDao();
+		Member member = memberDao.getMemberByEmailAndPassword(email, password);
 		
-		Member member = new Member(name, email, password, phone, address);
-		MemberDao rDao = new MemberDao();
-		String result = rDao.insert(member);
-		response.getWriter().println(result);
-
+		if (member != null) {
+			// login user
+			// TODO: change to redirect to home page
+			response.getWriter().print("member logged in");
+		} else {
+			// user does not exist
+			response.getWriter().print("email or password is incorrect");
+		}
+		
 	}
 
 }

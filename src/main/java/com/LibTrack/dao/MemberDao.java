@@ -8,9 +8,10 @@ import com.LibTrack.models.Member;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RegisterDao {
+public class MemberDao {
 	private String dburl="jdbc:mysql://localhost:3306/LibTrack";
 	private String dbuname="root";
 	private String dbpassword="CS157A@SJSU";
@@ -52,14 +53,34 @@ public class RegisterDao {
 			ps.setString(1, member.getName());
 			ps.setString(2, member.getEmail());
 			ps.setString(3, member.getPassword());
-			ps.setString(3, member.getPhone());
-			ps.setString(4, member.getAddress());
-			ps.setString(5, formattedDate);
+			ps.setString(4, member.getPhone());
+			ps.setString(5, member.getAddress());
+			ps.setString(6, formattedDate);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			result = "Data not entered";
 			e.printStackTrace();
 		}
 		return result;
+	}
+	public Member getMemberByEmailAndPassword(String email, String password) {
+		loadDriver(dbdriver);
+		Connection con = getConnection();
+		
+		String query = "SELECT * FROM LibTrack.Members WHERE Email = ? AND Password = ?";
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, email);
+			ps.setString(2, password);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				// get member attributes
+				Member member = new Member(rs.getString("Name"), rs.getString("Email"), rs.getString("Password"), rs.getString("PhoneNumber"), rs.getString("Address"));
+				return member;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
