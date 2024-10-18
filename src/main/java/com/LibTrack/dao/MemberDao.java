@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import com.LibTrack.models.Member;
+import com.LibTrack.utils.DatabaseConn;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,32 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MemberDao {
-	private String dburl="jdbc:mysql://localhost:3306/LibTrack";
-	private String dbuname="root";
-	private String dbpassword="CS157A@SJSU";
-	private String dbdriver="com.mysql.cj.jdbc.Driver";
-	
-	public void loadDriver(String dbdriver) {
-		try {
-			Class.forName(dbdriver);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-	public Connection getConnection() {
-		Connection con = null;
-		try {
-			con = DriverManager.getConnection(dburl, dbuname, dbpassword);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return con;
-		
-	}
 	
 	public String insert(Member member) {
-		loadDriver(dbdriver);
-		Connection con = getConnection();
+		Connection con = DatabaseConn.getConnection();
 		String result = "data entered successfully";
 
 		// Get the current date
@@ -64,9 +42,7 @@ public class MemberDao {
 		return result;
 	}
 	public Member getMemberByEmailAndPassword(String email, String password) {
-		loadDriver(dbdriver);
-		Connection con = getConnection();
-		
+		Connection con = DatabaseConn.getConnection();
 		String query = "SELECT * FROM LibTrack.Members WHERE Email = ? AND Password = ?";
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
