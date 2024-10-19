@@ -1,7 +1,8 @@
 package com.LibTrack.models;
 
 public class Member {
-	private String name,email,password,phone,address;
+	private int memberId;
+	private String name, email, password, phone, address;
 
 	public Member(String name, String email, String password, String phone, String address) {
 		super();
@@ -10,6 +11,24 @@ public class Member {
 		this.password = password;
 		this.phone = phone;
 		this.address = address;
+	}
+
+	public Member(int memberId, String name, String email, String password, String phone, String address) {
+		super();
+		this.memberId = memberId;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.phone = phone;
+		this.address = address;
+	}
+
+	public int getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(int memberId) {
+		this.memberId = memberId;
 	}
 
 	public String getName() {
@@ -51,5 +70,5 @@ public class Member {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 }

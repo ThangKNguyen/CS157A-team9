@@ -11,26 +11,6 @@ import com.LibTrack.models.BorrowingHistoryItem;
 import com.LibTrack.utils.DatabaseConn;
 
 public class BorrowingHistoryDao {
-
-	public String getNameByMemberId(int memberId) {
-
-		String query = "SELECT Name FROM LibTrack.Members WHERE MemberID = ?";
-		String res = null;
-		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
-			ps.setInt(1, memberId);
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) { // Check if there is a result
-				res = rs.getString("Name");
-			} else {
-				System.out.println("No member found with ID: " + memberId);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return res;
-
-	}
-
 	public List<BorrowingHistoryItem> getBorrowingHistoryByMemberId(int memberId) {
 		String query = "SELECT bh.BorrowID, b.Title, bh.BorrowDate, bh.DueDate, bh.ReturnDate, bh.Status "
 				+ "FROM LibTrack.Borrowing_History bh " + "JOIN Books b ON bh.BookID = b.BookID "

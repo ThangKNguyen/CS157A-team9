@@ -34,7 +34,23 @@ public class MemberDao {
 		return result;
 	}
 
-	public Member getMemberByEmailAndPassword(String email, String password) {
+	public Member getMemberById(int id) {
+		String query = "SELECT * FROM LibTrack.Members WHERE MemberID = ?";
+		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				Member member = new Member(rs.getInt("MemberID"), rs.getString("Name"), rs.getString("Email"),
+						rs.getString("Password"), rs.getString("PhoneNumber"), rs.getString("Address"));
+				return member;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public Member validateMember(String email, String password) {
 		String query = "SELECT * FROM LibTrack.Members WHERE Email = ? AND Password = ?";
 
 		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
@@ -43,8 +59,8 @@ public class MemberDao {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				// get member attributes
-				Member member = new Member(rs.getString("Name"), rs.getString("Email"), rs.getString("Password"),
-						rs.getString("PhoneNumber"), rs.getString("Address"));
+				Member member = new Member(rs.getInt("MemberID"), rs.getString("Name"), rs.getString("Email"),
+						rs.getString("Password"), rs.getString("PhoneNumber"), rs.getString("Address"));
 				return member;
 			}
 		} catch (SQLException e) {
