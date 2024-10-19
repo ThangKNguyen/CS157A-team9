@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConn {
-	private static String dburl="jdbc:mysql://localhost:3306/LibTrack";
-	private static String dbuname="root";
-	private static String dbpassword="CS157A@SJSU";
+	private static String dburl = "jdbc:mysql://localhost:3306/LibTrack";
+	private static String dbuname = "root";
+	private static String dbpassword = "CS157A@SJSU";
 
 	static {
 		try {
@@ -16,15 +16,10 @@ public class DatabaseConn {
 			e.printStackTrace();
 		}
 	}
-	public static Connection getConnection() {
-		Connection con = null;
-		try {
-			con = DriverManager.getConnection(dburl, dbuname, dbpassword);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return con;
-		
+
+	public static Connection getConnection() throws SQLException {
+		return DriverManager.getConnection(dburl, dbuname, dbpassword);
+
 	}
 
 }
