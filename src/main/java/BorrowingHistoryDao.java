@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BorrowingHistoryDao {
-	private String dburl="jdbc:mysql://localhost:3306/LibTrack";
+	private String dburl="jdbc:mysql://localhost:3306/libtrack";
 	private String dbuname="root";
-	private String dbpassword="CS157A@SJSU";
+	private String dbpassword="Apes2getherstrong!";
 	private String dbdriver="com.mysql.cj.jdbc.Driver";
 	
 	public void loadDriver(String dbdriver) {
 		try {
-			Class.forName(dbdriver);
+			Class.forName(dbdriver);			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
