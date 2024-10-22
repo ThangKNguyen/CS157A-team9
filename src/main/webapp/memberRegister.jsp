@@ -10,7 +10,21 @@
 <body class="bg-gray-100 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Register for LibTrack</h2>
-        
+		<%
+		String error = request.getParameter("error");
+		if (error != null && !error.isEmpty()) {
+		%>
+		<div class="mb-4 p-4 rounded-md bg-red-50 border border-red-300">
+			<div class="flex items-center">
+				<i class="lucide-alert-circle text-red-400 mr-2"></i>
+				<p class="text-sm font-medium text-red-800">
+					Error: User may already exist.
+				</p>
+			</div>
+		</div>
+		<%
+		}
+		%>
         <form action="Register" method="post" class="space-y-4">
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>

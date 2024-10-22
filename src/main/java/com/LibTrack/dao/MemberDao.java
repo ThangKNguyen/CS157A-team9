@@ -12,9 +12,8 @@ import com.LibTrack.utils.DatabaseConn;
 
 public class MemberDao {
 
-	public String insert(Member member) {
+	public Member insert(Member member) {
 
-		String result = "data entered successfully";
 		LocalDate currentDate = LocalDate.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String formattedDate = currentDate.format(formatter);
@@ -28,10 +27,10 @@ public class MemberDao {
 			ps.setString(6, formattedDate);
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			result = "Data not entered";
 			e.printStackTrace();
+			return null;
 		}
-		return result;
+		return member;
 	}
 
 	public Member getMemberById(int id) {

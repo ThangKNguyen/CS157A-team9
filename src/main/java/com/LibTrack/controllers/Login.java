@@ -52,7 +52,7 @@ public class Login extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loggedInUser", member);
 			session.setAttribute("memberId", member.getMemberId());
-			response.sendRedirect("BorrowingHistory");
+			response.sendRedirect("header.jsp");
 		} else {
 			// user does not exist
 			response.sendRedirect("memberLogin.jsp?error=invalid_credentials");
