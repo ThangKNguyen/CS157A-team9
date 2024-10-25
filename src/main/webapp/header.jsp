@@ -16,9 +16,9 @@
                     <span class="font-bold">LibTrack</span>
                 </a>
                 <nav class="flex items-center space-x-6 text-sm font-medium">
-                    <a href="/browse/category" class="hover:text-gray-700">Categories</a>
-                    <a href="/browse/genre" class="hover:text-gray-700">Genres</a>
-                    <a href="/browse/author" class="hover:text-gray-700">Authors</a>
+                    <a href="Categories" class="hover:text-gray-700">Categories</a>
+                    <a href="Genres" class="hover:text-gray-700">Genres</a>
+                    <a href="Authors" class="hover:text-gray-700">Authors</a>
                 </nav>
             </div>
             <div class="flex flex-1 items-center justify-end space-x-4">
