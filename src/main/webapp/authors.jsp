@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book Categories</title>
+<title>Book Authors</title>
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
@@ -15,14 +15,14 @@
 		<!-- Sidebar -->
 		<aside class="w-64 bg-white shadow-md">
 			<div class="p-4">
-				<h2 class="text-2xl font-bold text-gray-800">Categories</h2>
+				<h2 class="text-2xl font-bold text-gray-800">Authors</h2>
 			</div>
 			<nav class="mt-4">
 				<ul>
-					<c:forEach var="category" items="${categories}">
-						<li><a href="BooksByCategory?categoryId=${category.id}"
+					<c:forEach var="author" items="${authors}">
+						<li><a href="BooksByAuthor?authorId=${author.id}"
 							class="block py-2 px-4 text-gray-700 hover:bg-gray-200">
-								${category.name} </a></li>
+								${author.name} </a></li>
 					</c:forEach>
 				</ul>
 			</nav>
@@ -32,25 +32,25 @@
 		<main class="flex-1 p-8 overflow-y-auto">
 			<div class="container mx-auto px-4 py-8">
 				<%
-				// Check if the categoryId is null (i.e., no category selected)
-				if (request.getParameter("categoryId") == null) {
+				// Check if the authorId is null (i.e., no author selected)
+				if (request.getParameter("authorId") == null) {
 				%>
-				<h2 class="text-3xl font-bold text-gray-800 mb-6">No category
+				<h2 class="text-3xl font-bold text-gray-800 mb-6">No author
 					selected</h2>
-				<p class="text-gray-600 mb-4">Please select a category to view
+				<p class="text-gray-600 mb-4">Please select a author to view
 					the books.</p>
 				<%
 				} else {
 				%>
-				<h2 class="text-3xl font-bold text-gray-800 mb-6">${categoryName}
+				<h2 class="text-3xl font-bold text-gray-800 mb-6">${authorName}
 					Books</h2>
 				<c:choose>
 					<c:when test="${empty books}">
 						<div class="w-full text-center py-12">
 							<p class="text-2xl font-semibold text-gray-700">No books in
-								this category.</p>
+								this author.</p>
 							<p class="mt-2 text-gray-500">Please check back later or try
-								another category.</p>
+								another author.</p>
 						</div>
 					</c:when>
 					<c:otherwise>
