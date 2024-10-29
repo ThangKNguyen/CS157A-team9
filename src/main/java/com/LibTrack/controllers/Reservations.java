@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.LibTrack.dao.FineDao;
-import com.LibTrack.models.FineItem;
+import com.LibTrack.dao.ReservationDao;
 import com.LibTrack.models.Member;
+import com.LibTrack.models.ReservationItem;
 
 /**
- * Servlet implementation class Fines
+ * Servlet implementation class Reservations
  */
-@WebServlet("/Fines")
-public class Fines extends HttpServlet {
+@WebServlet("/Reservations")
+public class Reservations extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Fines() {
+	public Reservations() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,6 +36,7 @@ public class Fines extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("loggedInUser") == null) {
 			response.sendRedirect("memberLogin.jsp");
@@ -48,17 +49,16 @@ public class Fines extends HttpServlet {
 		}
 		try {
 			int memberId = member.getMemberId();
-			FineDao fineDao = new FineDao();
+			ReservationDao reservationDao = new ReservationDao();
 			// Get borrowing history using DAO
-			List<FineItem> fines = fineDao.getFinesByMemberId(memberId);
+			List<ReservationItem> reservations = reservationDao.getReservationsByMemberId(memberId);
 
 			// Set the borrowing history as a request attribute and forward to JSP
-			request.setAttribute("fines", fines);
-			request.getRequestDispatcher("fines.jsp").forward(request, response);
+			request.setAttribute("reservations", reservations);
+			request.getRequestDispatcher("reservations.jsp").forward(request, response);
 		} catch (Exception e) {
-			throw new ServletException("Error retrieving fines", e);
+			throw new ServletException("Error retrieving reservations", e);
 		}
-
 	}
 
 	/**
