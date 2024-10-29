@@ -33,7 +33,6 @@ CREATE TABLE LibTrack.Members (
     PhoneNumber VARCHAR(15),
     Address VARCHAR(255),
     JoinDate DATE NOT NULL,
-    OutstandingFines DECIMAL(10, 2),
     Password VARCHAR(255) NOT NULL -- Added password column
 );
 

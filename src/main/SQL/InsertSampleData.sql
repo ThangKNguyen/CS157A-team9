@@ -51,17 +51,17 @@ INSERT INTO Books (Title, ISBN, AuthorID, CategoryID, GenreID, Availability) VAL
 ('Beloved', '9781400033416', 10, 1, 1, 'Borrowed');
 
 -- Members
-INSERT INTO Members (Name, Email, PhoneNumber, Address, JoinDate, OutstandingFines, Password) VALUES
-('Alice Johnson', 'alice@example.com', '123-456-7890', '123 Maple St', '2022-01-15', 0.00, 'alicePass123'),
-('Bob Smith', 'bob@example.com', '234-567-8901', '234 Oak St', '2021-07-22', 5.50, 'bobSecure789'),
-('Charlie Brown', 'charlie@example.com', '345-678-9012', '345 Pine St', '2020-05-10', 0.00, 'charlieBest456'),
-('Diana Prince', 'diana@example.com', '456-789-0123', '456 Elm St', '2023-03-11', 2.25, 'dianaHero987'),
-('Edward Elric', 'edward@example.com', '567-890-1234', '567 Birch St', '2022-02-14', 0.00, 'edwardAlchemy123'),
-('Felicity Smoak', 'felicity@example.com', '678-901-2345', '678 Cedar St', '2020-09-05', 10.00, 'felicityIT456'),
-('George Clooney', 'george@example.com', '789-012-3456', '789 Walnut St', '2021-11-01', 3.75, 'georgeMovie789'),
-('Hannah Baker', 'hannah@example.com', '890-123-4567', '890 Cherry St', '2023-08-20', 0.00, 'hannahSecret123'),
-('Isaac Newton', 'isaac@example.com', '901-234-5678', '901 Willow St', '2021-12-30', 1.50, 'isaacGravity789'),
-('Jessica Jones', 'jessica@example.com', '012-345-6789', '012 Palm St', '2023-04-10', 0.00, 'jessicaDetective456');
+INSERT INTO Members (Name, Email, PhoneNumber, Address, JoinDate, Password) VALUES
+('Alice Johnson', 'alice@example.com', '123-456-7890', '123 Maple St', '2022-01-15', 'alicePass123'),
+('Bob Smith', 'bob@example.com', '234-567-8901', '234 Oak St', '2021-07-22', 'bobSecure789'),
+('Charlie Brown', 'charlie@example.com', '345-678-9012', '345 Pine St', '2020-05-10', 'charlieBest456'),
+('Diana Prince', 'diana@example.com', '456-789-0123', '456 Elm St', '2023-03-11', 'dianaHero987'),
+('Edward Elric', 'edward@example.com', '567-890-1234', '567 Birch St', '2022-02-14', 'edwardAlchemy123'),
+('Felicity Smoak', 'felicity@example.com', '678-901-2345', '678 Cedar St', '2020-09-05', 'felicityIT456'),
+('George Clooney', 'george@example.com', '789-012-3456', '789 Walnut St', '2021-11-01', 'georgeMovie789'),
+('Hannah Baker', 'hannah@example.com', '890-123-4567', '890 Cherry St', '2023-08-20', 'hannahSecret123'),
+('Isaac Newton', 'isaac@example.com', '901-234-5678', '901 Willow St', '2021-12-30', 'isaacGravity789'),
+('Jessica Jones', 'jessica@example.com', '012-345-6789', '012 Palm St', '2023-04-10', 'jessicaDetective456');
 
 -- Reviews
 INSERT INTO Reviews (BookID, MemberID, Rating, ReviewText, ReviewDate) VALUES
