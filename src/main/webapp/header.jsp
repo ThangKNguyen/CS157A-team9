@@ -29,7 +29,7 @@
                     </div>
                 </form>
 				<div class="flex items-center space-x-2 hover:text-gray-700">
-					<a href="/LibTrack/BorrowingHistory">My Account</a>
+					<a href="/LibTrack/profile.jsp">My Account</a>
 				</div>
 			</div>
 		</div>
