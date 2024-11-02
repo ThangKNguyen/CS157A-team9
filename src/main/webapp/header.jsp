@@ -8,6 +8,11 @@
     <title>LibTrack</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<%
+	if (session == null || session.getAttribute("loggedInUser") == null) {
+		response.sendRedirect("memberLogin.jsp");
+	}
+%>
 <body>
     <header class="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div class="container mx-auto flex h-14 items-center">
