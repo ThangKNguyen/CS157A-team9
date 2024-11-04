@@ -11,11 +11,6 @@
     <title>Library Homepage</title>
 </head>
 <body>
-    <div class="container mx-auto px-4 py-8">
-        <header class="mb-8">
-            <h1 class="text-3xl font-bold">Welcome back, <c:out value="${loggedInUser.name}" default="Alice"/>!</h1>
-        </header>
-
 	<header class="bg-black text-primary-foreground py-4">
 		<div class="mx-auto flex justify-around items-center">
 			<h1 class="text-3xl font-bold mr-[300px] text-white">LibTrack</h1>
