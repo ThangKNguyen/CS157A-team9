@@ -2,6 +2,7 @@
 <%@ page session="true" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<jsp:include page="header.jsp" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
