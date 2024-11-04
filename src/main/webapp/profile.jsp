@@ -38,15 +38,15 @@
         <div class="bg-white shadow-md rounded-lg p-6">
             <h2 class="text-2xl font-semibold text-gray-700 mb-4">Library Activities</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <a href="/LibTrack/BorrowingHistory" class="block p-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition duration-300">
+                <a href="BorrowingHistory" class="block p-4 bg-blue-100 rounded-lg hover:bg-blue-200 transition duration-300">
                     <h3 class="text-lg font-semibold text-blue-800 mb-2">Borrowing History</h3>
                     <p class="text-sm text-blue-600">View your past and current borrows</p>
                 </a>
-                <a href="/LibTrack/Fines" class="block p-4 bg-red-100 rounded-lg hover:bg-red-200 transition duration-300">
+                <a href="Fines" class="block p-4 bg-red-100 rounded-lg hover:bg-red-200 transition duration-300">
                     <h3 class="text-lg font-semibold text-red-800 mb-2">Fines</h3>
                     <p class="text-sm text-red-600">Check and pay your outstanding fines</p>
                 </a>
-                <a href="/LibTrack/Reservations" class="block p-4 bg-green-100 rounded-lg hover:bg-green-200 transition duration-300">
+                <a href="Reservations" class="block p-4 bg-green-100 rounded-lg hover:bg-green-200 transition duration-300">
                     <h3 class="text-lg font-semibold text-green-800 mb-2">Reservations</h3>
                     <p class="text-sm text-green-600">Manage your book reservations</p>
                 </a>

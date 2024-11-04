@@ -15,12 +15,12 @@
 %>
 <body>
     <header class="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-        <div class="container mx-auto flex h-14 items-center">
+        <div class="container mx-auto px-4 lg:px-8 flex h-14 items-center">
             <div class="flex items-center">
-                <a href="/LibTrack/homePage.jsp" class="mr-6 flex items-center space-x-2">
+                <a href="homePage.jsp" class="mr-6 flex items-center space-x-2">
                     <span class="font-bold">LibTrack</span>
                 </a>
-                <nav class="flex items-center space-x-6 text-sm font-medium">
+                <nav class="flex items-center space-x-5 text-sm font-medium">
                     <a href="Categories" class="hover:text-gray-700">Categories</a>
                     <a href="Genres" class="hover:text-gray-700">Genres</a>
                     <a href="Authors" class="hover:text-gray-700">Authors</a>
@@ -30,11 +30,11 @@
                 <form action="/search" method="get" class="w-64">
                     <div class="relative">
                         <input type="search" name="q" placeholder="Search books..." 
-                               class="w-full rounded-md border border-gray-300 bg-transparent py-2 pl-8 pr-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2" />
+                               class="w-full rounded-md border border-gray-300 bg-transparent py-2 pl-3 pr-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2" />
                     </div>
                 </form>
-				<div class="flex items-center space-x-2 hover:text-gray-700">
-					<a href="/LibTrack/profile.jsp">My Account</a>
+				<div class="flex font-semibold h-9 items-center space-x-2 bg-black text-white px-4 py-2 rounded-md hover:text-gray-300 transition duration-200">
+    				<a href="profile.jsp">My Account</a>
 				</div>
 			</div>
 		</div>
