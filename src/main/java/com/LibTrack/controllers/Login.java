@@ -34,7 +34,7 @@ public class Login extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loggedInUser", member);
 			session.setAttribute("memberId", member.getMemberId());
-			response.sendRedirect("homePage.jsp");  // Correct redirect
+			response.sendRedirect("Home");  // Correct redirect
 		} else {
 			// user does not exist
 			response.sendRedirect("memberLogin.jsp?error=invalid_credentials");  // Error handling

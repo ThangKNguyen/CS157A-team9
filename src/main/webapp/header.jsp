@@ -17,7 +17,7 @@
     <header class="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div class="container mx-auto px-4 lg:px-8 flex h-14 items-center">
             <div class="flex items-center">
-                <a href="homePage.jsp" class="mr-6 flex items-center space-x-2">
+                <a href="Home" class="mr-6 flex items-center space-x-2">
                     <span class="font-bold">LibTrack</span>
                 </a>
                 <nav class="flex items-center space-x-5 text-sm font-medium">
