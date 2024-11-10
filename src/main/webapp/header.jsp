@@ -24,6 +24,7 @@
                     <a href="Categories" class="hover:text-gray-700">Categories</a>
                     <a href="Genres" class="hover:text-gray-700">Genres</a>
                     <a href="Authors" class="hover:text-gray-700">Authors</a>
+                    <a href="Reviews" class="hover:text-gray-700">Reviews</a>
                 </nav>
             </div>
             <div class="flex flex-1 items-center justify-end space-x-4">
