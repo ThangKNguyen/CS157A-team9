@@ -40,4 +40,19 @@ public class ReviewDao {
 		}
 		return reviews;
 	}
+
+	public void addReview(int memberId, int bookId, int rating, String reviewText) {
+		String query = "INSERT INTO LibTrack.Reviews (BookID, MemberID, Rating, ReviewText, ReviewDate) "
+				+ "VALUES (?, ?, ?, ?, CURRENT_DATE)";
+
+		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+			ps.setInt(1, bookId);
+			ps.setInt(2, memberId);
+			ps.setInt(3, rating);
+			ps.setString(4, reviewText);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

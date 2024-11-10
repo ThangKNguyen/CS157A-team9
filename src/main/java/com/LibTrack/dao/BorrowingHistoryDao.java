@@ -43,4 +43,19 @@ public class BorrowingHistoryDao {
 		}
 		return borrowingHistory;
 	}
+
+	public int getBookIdFromBorrowId(int borrowId) {
+		String query = "SELECT BookID FROM LibTrack.Borrowing_History WHERE BorrowID = ?";
+		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+			ps.setInt(1, borrowId);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				int bookId = rs.getInt("BookID");
+				return bookId;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 }

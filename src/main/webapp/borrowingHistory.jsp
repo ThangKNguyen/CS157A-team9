@@ -78,7 +78,7 @@
             <div class="mt-3 text-center">
                 <h3 class="text-lg leading-6 font-medium text-gray-900" id="modalTitle">Review</h3>
                 <div class="mt-2 px-7 py-3">
-                    <form id="reviewForm">
+                    <form action="AddReview" method="post" id="reviewForm">
                         <input type="hidden" id="borrowId" name="borrowId">
                         <div class="mb-4">
                             <label for="rating" class="block text-gray-700 text-sm font-bold mb-2">Rating (1-5):</label>
