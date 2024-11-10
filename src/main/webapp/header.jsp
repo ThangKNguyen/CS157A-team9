@@ -33,9 +33,14 @@
                                class="w-full rounded-md border border-gray-300 bg-transparent py-2 pl-3 pr-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2" />
                     </div>
                 </form>
-				<div class="flex font-semibold h-9 items-center space-x-2 bg-black text-white px-4 py-2 rounded-md hover:text-gray-300 transition duration-200">
+				<div class="flex font-semibold h-9 items-center space-x-2 bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-500 transition duration-200">
     				<a href="profile.jsp">My Account</a>
 				</div>
+				
+				<div class="flex font-semibold h-9 items-center space-x-2 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition duration-200">
+    				<a href="landingPage.jsp">Log Out</a>
+				</div>
+				
 			</div>
 		</div>
     </header>
