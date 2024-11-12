@@ -108,16 +108,42 @@
                     <p class="text-sm text-gray-500">Based on your reading history</p>
                 </div>
                 
-                <table class="w-full">
-                	<thead class="bg-gray-50">
-          					<tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Book Title</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Authors</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Genres</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ISBN</th>
-       					   </tr>
-                    </thead>
-                 </table>
+               <table class="w-full bg-white">
+					    <thead class="bg-gray-50">
+					        <tr>
+					            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Book Title</th>
+					            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Authors</th>
+					            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Genre</th>
+					            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ISBN</th>
+					        </tr>
+					    </thead>
+					    <tbody>
+					        <c:set var="count" value="0"/>
+					        <c:forEach var="book" items="${availableBooks}">
+					            <!-- Check if the book is not in borrowingHistory -->
+					            <c:set var="isBorrowed" value="false"/>
+					            <c:forEach var="borrowedBook" items="${borrowingHistory}">
+					                <c:if test="${borrowedBook.title == book.title}">
+					                    <c:set var="isBorrowed" value="true"/>
+					                </c:if>
+					            </c:forEach>
+					
+					            <!-- Display the book only if it's not borrowed and count is less than 3 -->
+					            <c:if test="${!isBorrowed && count < 3}">
+					                <tr class="border-b border-gray-300">
+					                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${book.title}</td>
+					                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${book.author}</td>
+					                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${book.genre}</td>
+					                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${book.ISBN}</td>
+					                </tr>
+					                <!-- Increment the count after displaying a book -->
+					                <c:set var="count" value="${count + 1}"/>
+					            </c:if>
+					        </c:forEach>
+					    </tbody>
+				</table>
+               
+               
                 
                 
             </div>
@@ -126,24 +152,25 @@
                 <div class="p-4 border-b">
                     <h2 class="text-xl font-semibold">Account Overview</h2>
                 </div>
-                <div class="p-4 space-y-4">
+                <div class="p-4 space-y-4 mt-2">
                     <div class="flex items-center space-x-4">
                         <div class="flex mr-3">
                             <i class="fa-solid fa-user text-4xl"></i>
                         </div>
                         <div>
-                            <p class="text-l font-semibold"><c:out value="${loggedInUser.name}"/></p>
-                            <p class="text-l text-gray-500">Member since 2021</p>
+                            <p class="text-lg font-semibold"><c:out value="${loggedInUser.name}"/></p>
+                            <p class="text-lg text-gray-500">Member since ${loggedInUser.joinDate.substring(0, 4)}</p>
+                            
                         </div>
                     </div>
-                    <div>
-                        <p class="text-xl font-semibold">Current Loans: <c:out value="${borrowedCount}"/> books</p>
+                    <div class ="mt-4">
+                        <p class="text-lg font-semibold">Books Currently Borrowed: <c:out value="${borrowedCount}"/></p>
                     </div>
                     
                     <!-- Fines Section -->
                     <div class="flex items-center mt-3">
-                        <p class="text-xl font-semibold mr-2">Current Fines:</p>
-                        <p class="text-xl font-semibold text-gray-900">
+                        <p class="text-lg font-semibold mr-2">Outstanding Fines:</p>
+                        <p class="text-lg font-semibold text-gray-900">
                             <fmt:formatNumber value="${fines.stream().filter(f -> f.paidStatus != 'Paid').map(f -> f.fineAmount).sum()}" type="currency" currencySymbol="$" />
                         </p>
                     </div>

@@ -32,6 +32,8 @@
                     <p class="text-sm text-gray-600">Address</p>
                     <p class="text-lg font-medium text-gray-800">${loggedInUser.address}</p>
                 </div>
+                
+                
             </div>
         </div>
         

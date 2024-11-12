@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.LibTrack.dao.BorrowingHistoryDao;
-import com.LibTrack.dao.FineDao;
+
+import com.LibTrack.models.BookDetails;
 import com.LibTrack.models.BorrowingHistoryItem;
 import com.LibTrack.models.FineItem;
 import com.LibTrack.models.Member;
+import com.LibTrack.dao.*;
 
 /**
  * Servlet implementation class Home
@@ -55,8 +56,11 @@ public class Home extends HttpServlet {
 			
 			BorrowingHistoryDao borrowingHistoryDAO = new BorrowingHistoryDao();
 			List<BorrowingHistoryItem> borrowingHistory = borrowingHistoryDAO.getBorrowingHistoryByMemberId(memberId);
-
 			
+			BookDao bookDao = new BookDao();
+			List<BookDetails> availableBooks = bookDao.getAvailableBooksWithDetails();
+			
+			request.setAttribute("availableBooks", availableBooks);
 			request.setAttribute("borrowingHistory", borrowingHistory);
 			request.setAttribute("fines", fines);
 			request.getRequestDispatcher("homePage.jsp").forward(request, response);

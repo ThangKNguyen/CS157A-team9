@@ -40,7 +40,7 @@ public class MemberDao {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				Member member = new Member(rs.getInt("MemberID"), rs.getString("Name"), rs.getString("Email"),
-						rs.getString("Password"), rs.getString("PhoneNumber"), rs.getString("Address"));
+						rs.getString("Password"), rs.getString("PhoneNumber"), rs.getString("Address"), rs.getString("JoinDate"));
 				return member;
 			}
 		} catch (SQLException e) {
@@ -50,21 +50,29 @@ public class MemberDao {
 	}
 
 	public Member validateMember(String email, String password) {
-		String query = "SELECT * FROM LibTrack.Members WHERE Email = ? AND Password = ?";
+	    String query = "SELECT * FROM LibTrack.Members WHERE Email = ? AND Password = ?";
 
-		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
-			ps.setString(1, email);
-			ps.setString(2, password);
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				// get member attributes
-				Member member = new Member(rs.getInt("MemberID"), rs.getString("Name"), rs.getString("Email"),
-						rs.getString("Password"), rs.getString("PhoneNumber"), rs.getString("Address"));
-				return member;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
+	    try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+	        ps.setString(1, email);
+	        ps.setString(2, password);
+	        ResultSet rs = ps.executeQuery();
+	        if (rs.next()) {
+	            // Include joinDate
+	            Member member = new Member(
+	                rs.getInt("MemberID"),
+	                rs.getString("Name"),
+	                rs.getString("Email"),
+	                rs.getString("Password"),
+	                rs.getString("PhoneNumber"),
+	                rs.getString("Address"),
+	                rs.getString("JoinDate")  // New field
+	            );
+	            return member;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
 	}
+
 }
