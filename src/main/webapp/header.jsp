@@ -38,7 +38,7 @@
 				</div>
 				
 				<div class="flex font-semibold h-9 items-center space-x-2 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition duration-200">
-    				<a href="landingPage.jsp">Log Out</a>
+    				<a href="Logout">Log Out</a>
 				</div>
 				
 			</div>
