@@ -12,8 +12,17 @@ public class Member {
 		this.password = password;
 		this.phone = phone;
 		this.address = address;
-		this.setJoinDate(joinDate);
+		this.joinDate=joinDate;
 		
+	}
+	
+	public Member(String name, String email, String password, String phone, String address) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.phone = phone;
+		this.address = address;	
 	}
 
 	 public Member(int memberId, String name, String email, String password, String phone, String address, String joinDate) {

@@ -17,14 +17,21 @@
 	        <nav>
 	            <ul class="flex space-x-2">
 	                <li>
-	                    <a href="memberLogin.jsp" class="text-white hover:bg-primary-foreground hover:text-primary px-4 py-2">
-	                        Login
-	                    </a>
+	                	<div class="flex font-semibold h-9 items-center space-x-2 bg-white text-black border-2 border-white px-4 py-2 rounded-md hover:bg-black hover:text-white transition duration-200">
+	                		 <a href="memberLogin.jsp" >
+	                       			 Login
+	                    		</a>
+	                	</div>
+	                   
 	                </li>
 	                <li>
-	                    <a href="memberRegister.jsp" class="text-white bg-primary-foreground text-primary hover:bg-primary hover:text-primary-foreground px-4 py-2">
+	                
+	                <div class="flex font-semibold h-9 items-center space-x-2 bg-black text-white border-2 border-black hover:bg-white hover:text-black hover:border-white px-4 py-2 rounded-md transition duration-200">
+	                	<a href="memberRegister.jsp">
 	                        Register
 	                    </a>
+	                </div>
+	                    
 	                </li>
 	            </ul>
 	        </nav>
