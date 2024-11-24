@@ -67,6 +67,12 @@
 											<span
 												class="px-3 py-1 rounded-full text-sm font-semibold ${book.availability eq 'Available' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
 												${book.availability} </span>
+											<c:if
+												test="${book.availability eq 'Available' && not empty loggedInUser}">
+												<button onclick="openBorrowModal('${book.bookId}')"
+													class="border border-blue-500 text-blue-500 hover:bg-blue-100 font-semibold py-1 px-3 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+													Borrow</button>
+											</c:if>
 										</div>
 									</div>
 								</div>
@@ -81,5 +87,38 @@
 			</div>
 		</main>
 	</div>
+	<!-- Borrow Confirmation Modal -->
+    <div id="borrowModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden" role="dialog" aria-labelledby="borrowModalTitle" aria-modal="true">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-center">
+                <h3 class="text-lg leading-6 font-medium text-gray-900" id="borrowModalTitle">Confirm Borrow</h3>
+                <div class="mt-2 px-7 py-3">
+                    <p class="text-sm text-gray-500">Are you sure you want to borrow this book?</p>
+                    <div class="mt-4 flex justify-center">
+                        <form action="BookBorrow" method="post" id="borrowForm">
+                            <input type="hidden" id="borrowBookId" name="bookId">
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
+                                Confirm
+                            </button>
+                        </form>
+                        <button onclick="closeBorrowModal()" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openBorrowModal(bookId) {
+            document.getElementById('borrowBookId').value = bookId;
+            document.getElementById('borrowModal').classList.remove('hidden');
+        }
+
+        function closeBorrowModal() {
+            document.getElementById('borrowModal').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>
