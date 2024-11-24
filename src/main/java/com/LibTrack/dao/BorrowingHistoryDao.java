@@ -1,6 +1,7 @@
 package com.LibTrack.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -80,6 +81,31 @@ public class BorrowingHistoryDao {
 		}
 
 		// Return false if the update failed
+		return false;
+	}
+
+	public boolean createBorrowingRecord(int memberId, int bookId, Date dueDate) {
+		String query = "INSERT INTO LibTrack.Borrowing_History (BookID, MemberID, BorrowDate, DueDate, Status) "
+				+ "VALUES (?, ?, CURRENT_DATE, ?, 'Borrowed')";
+
+		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+
+			// Set parameters for the query
+			ps.setInt(1, bookId); // Set the bookId
+			ps.setInt(2, memberId); // Set the memberId
+			ps.setDate(3, dueDate); // Set the dueDate
+
+			// Execute the update
+			int rowsAffected = ps.executeUpdate();
+
+			// If the insertion was successful, return true
+			return rowsAffected > 0;
+
+		} catch (SQLException e) {
+			e.printStackTrace(); // Log the exception
+		}
+
+		// Return false if the insertion failed
 		return false;
 	}
 

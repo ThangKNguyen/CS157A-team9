@@ -1,6 +1,8 @@
 package com.LibTrack.controllers;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,16 +16,16 @@ import com.LibTrack.dao.BorrowingHistoryDao;
 import com.LibTrack.models.Member;
 
 /**
- * Servlet implementation class BookReturn
+ * Servlet implementation class BookBorrow
  */
-@WebServlet("/BookReturn")
-public class BookReturn extends HttpServlet {
+@WebServlet("/BookBorrow")
+public class BookBorrow extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public BookReturn() {
+	public BookBorrow() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -55,25 +57,32 @@ public class BookReturn extends HttpServlet {
 			response.sendRedirect("memberLogin.jsp");
 			return;
 		}
-		// we need BookID to update Book status, MemberID and BorrowID to update
-		// borrowing History
 		try {
 			int bookId = Integer.parseInt(request.getParameter("bookId"));
-			int borrowId = Integer.parseInt(request.getParameter("borrowId"));
+			int memberId = member.getMemberId();
 
-			// update borrowing history status
+			// create borrowing history for book
 			BorrowingHistoryDao bhdao = new BorrowingHistoryDao();
-			boolean isBorrowingUpdated = bhdao.markBookAsReturned(borrowId);
+			// create due Date
+			Date dueDate = Date.valueOf(LocalDate.now().plusDays(14));
+			boolean isBorrowingCreated = bhdao.createBorrowingRecord(memberId, bookId, dueDate);
 
 			// update books status
 			BookDao bdao = new BookDao();
-			boolean isBookUpdated = bdao.setBookAvailable(bookId);
+			boolean isBookUpdated = bdao.setBookBorrowed(bookId);
 
-			if (isBorrowingUpdated && isBookUpdated) {
-				request.setAttribute("message", "Book returned successfully!");
-				request.getRequestDispatcher("BorrowingHistory").forward(request, response);
+			if (isBorrowingCreated && isBookUpdated) {
+				String referer = request.getHeader("Referer");
+				request.setAttribute("message", "Book borrowed successfully!");
+				if (referer != null) {
+					// Redirect the user back to the exact same URL they came from
+					response.sendRedirect(referer);
+				} else {
+					// If there's no referer, redirect to a fallback page (like home)
+					response.sendRedirect("homePage.jsp");
+				}
 			} else {
-				request.setAttribute("errorMessage", "There was an issue returning the book. Please try again.");
+				request.setAttribute("errorMessage", "There was an issue borrowing the book. Please try again.");
 				response.getWriter().append("an error occured");
 			}
 		} catch (Exception e) {

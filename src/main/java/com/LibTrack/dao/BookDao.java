@@ -164,8 +164,31 @@ public class BookDao {
 		return books;
 	}
 
-	public boolean updateBookAvailability(int bookId) {
+	public boolean setBookAvailable(int bookId) {
 		String query = "UPDATE LibTrack.Books SET Availability = 'Available' WHERE BookID = ?";
+
+		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+
+			// Set the bookId parameter in the query
+			ps.setInt(1, bookId);
+
+			// Execute the update query
+			int rowsAffected = ps.executeUpdate();
+
+			// If at least one row was updated, return true
+			if (rowsAffected > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		// Return false if the update failed
+		return false;
+	}
+
+	public boolean setBookBorrowed(int bookId) {
+		String query = "UPDATE LibTrack.Books SET Availability = 'Borrowed' WHERE BookID = ?";
 
 		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
 
