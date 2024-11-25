@@ -149,33 +149,49 @@
             </div>
 
             <div class="bg-white shadow rounded-lg">
-                <div class="p-4 border-b">
-                    <h2 class="text-xl font-semibold">Account Overview</h2>
-                </div>
-                <div class="p-4 space-y-4 mt-2">
-                    <div class="flex items-center space-x-4">
-                        <div class="flex mr-3">
-                            <i class="fa-solid fa-user text-4xl"></i>
-                        </div>
-                        <div>
-                            <p class="text-lg font-semibold"><c:out value="${loggedInUser.name}"/></p>
-                            <p class="text-lg text-gray-500">Member since ${loggedInUser.joinDate.substring(0, 4)}</p>
-                            
-                        </div>
-                    </div>
-                    <div class ="mt-4">
-                        <p class="text-lg font-semibold">Books Currently Borrowed: <c:out value="${borrowedCount}"/></p>
-                    </div>
-                    
-                    <!-- Fines Section -->
-                    <div class="flex items-center mt-3">
-                        <p class="text-lg font-semibold mr-2">Outstanding Fines:</p>
-                        <p class="text-lg font-semibold text-gray-900">
-                            <fmt:formatNumber value="${fines.stream().filter(f -> f.paidStatus != 'Paid').map(f -> f.fineAmount).sum()}" type="currency" currencySymbol="$" />
-                        </p>
-                    </div>
-                </div>
+    <div class="p-4 border-b">
+        <h2 class="text-xl font-semibold">Account Overview</h2>
+    </div>
+    <div class="p-4 space-y-4 mt-2">
+        <div class="flex items-center space-x-4">
+            <div class="flex mr-3">
+                <i class="fa-solid fa-user text-4xl"></i>
             </div>
+            <div>
+                <p class="text-lg font-semibold"><c:out value="${loggedInUser.name}"/></p>
+                <p class="text-lg text-gray-500">Member since ${loggedInUser.joinDate.substring(0, 4)}</p>
+            </div>
+        </div>
+        
+        <!-- Books Currently Borrowed Section -->
+        <div class="mt-4">
+            <c:choose>
+                <c:when test="${borrowedCount == 0}">
+                    <p class="text-lg font-semibold text-gray-500">No currently borrowed books!</p>
+                </c:when>
+                <c:otherwise>
+                    <p class="text-lg font-semibold">Books Currently Borrowed: <c:out value="${borrowedCount}"/></p>
+                </c:otherwise>
+            </c:choose>
+        </div>
+        
+        <!-- Fines Section -->
+        <div class="flex items-center mt-3">
+            <c:choose>
+                <c:when test="${fines.stream().filter(f -> f.paidStatus != 'Paid').map(f -> f.fineAmount).sum() == 0}">
+                    <p class="text-lg font-semibold text-gray-500">No outstanding fines!</p>
+                </c:when>
+                <c:otherwise>
+                    <p class="text-lg font-semibold mr-2">Outstanding Fines:</p>
+                    <p class="text-lg font-semibold text-gray-900">
+                        <fmt:formatNumber value="${fines.stream().filter(f -> f.paidStatus != 'Paid').map(f -> f.fineAmount).sum()}" type="currency" currencySymbol="$" />
+                    </p>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </div>
+</div>
+            
         </div>
     </div>
 </body>

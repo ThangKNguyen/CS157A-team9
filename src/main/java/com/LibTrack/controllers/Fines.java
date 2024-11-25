@@ -1,6 +1,7 @@
 package com.LibTrack.controllers;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -65,10 +66,46 @@ public class Fines extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	        throws ServletException, IOException {
+	    HttpSession session = request.getSession(false);
+	    if (session == null || session.getAttribute("loggedInUser") == null) {
+	        response.sendRedirect("memberLogin.jsp");
+	        return;
+	    }
+
+	    Member member = (Member) session.getAttribute("loggedInUser");
+	    if (member == null) {
+	        response.sendRedirect("memberLogin.jsp");
+	        return;
+	    }
+
+	    try {
+	        // Retrieve member ID
+	        int memberId = member.getMemberId();
+
+	        // Retrieve amount parameter from the request
+	        String amountStr = request.getParameter("amount");
+	        if (amountStr == null || amountStr.isEmpty()) {
+	            request.setAttribute("error", "Amount cannot be empty.");
+	            request.getRequestDispatcher("fines.jsp").forward(request, response);
+	            return;
+	        }
+
+	        // Convert amount to BigDecimal
+	        BigDecimal amountToPay = new BigDecimal(amountStr);
+
+	        // Call DAO to process payment
+	        FineDao fineDao = new FineDao();
+	        fineDao.payFine(memberId, amountToPay);
+
+	        // Redirect to avoid form resubmission issue
+	        response.sendRedirect("Fines");
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        throw new ServletException("Error processing fine payment", e);
+	    }
 	}
 
 }

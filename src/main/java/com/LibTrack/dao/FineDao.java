@@ -95,5 +95,44 @@ public class FineDao {
 			e.printStackTrace();
 		}
 	}
+	
+	public void payFine(int memberId, BigDecimal amountToPay) {
+	    String selectFinesQuery = "SELECT FineID, FineAmount FROM LibTrack.Fines WHERE MemberID = ? AND PaidStatus = 'Unpaid' ORDER BY IssuedDate";
+	    String updateFineQuery = "UPDATE LibTrack.Fines SET FineAmount = ?, PaidStatus = ? WHERE FineID = ?";
+
+	    try (Connection con = DatabaseConn.getConnection();
+	         PreparedStatement selectPs = con.prepareStatement(selectFinesQuery)) {
+	        
+	        selectPs.setInt(1, memberId);
+	        ResultSet rs = selectPs.executeQuery();
+
+	        while (rs.next() && amountToPay.compareTo(BigDecimal.ZERO) > 0) {
+	            int fineId = rs.getInt("FineID");
+	            BigDecimal fineAmount = rs.getBigDecimal("FineAmount");
+
+	            if (amountToPay.compareTo(fineAmount) >= 0) {
+	                // Full payment for this fine
+	                try (PreparedStatement updatePs = con.prepareStatement(updateFineQuery)) {
+	                    updatePs.setBigDecimal(1, BigDecimal.ZERO);
+	                    updatePs.setString(2, "Paid");
+	                    updatePs.setInt(3, fineId);
+	                    updatePs.executeUpdate();
+	                }
+	                amountToPay = amountToPay.subtract(fineAmount);
+	            } else {
+	                // Partial payment for this fine
+	                try (PreparedStatement updatePs = con.prepareStatement(updateFineQuery)) {
+	                    updatePs.setBigDecimal(1, fineAmount.subtract(amountToPay));
+	                    updatePs.setString(2, "Unpaid");
+	                    updatePs.setInt(3, fineId);
+	                    updatePs.executeUpdate();
+	                }
+	                amountToPay = BigDecimal.ZERO;
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
 
 }

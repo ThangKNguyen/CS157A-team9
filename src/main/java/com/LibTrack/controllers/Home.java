@@ -64,6 +64,7 @@ public class Home extends HttpServlet {
 			request.setAttribute("borrowingHistory", borrowingHistory);
 			request.setAttribute("fines", fines);
 			request.getRequestDispatcher("homePage.jsp").forward(request, response);
+			
 		} catch (Exception e) {
 			throw new ServletException("Error retrieving fines", e);
 		}
