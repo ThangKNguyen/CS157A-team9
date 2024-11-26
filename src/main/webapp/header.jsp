@@ -29,9 +29,9 @@
                 </nav>
             </div>
             <div class="flex flex-1 items-center justify-end space-x-4">
-                <form action="/search" method="get" class="w-64">
+                <form action="BookConnection" method="get" class="w-64">
                     <div class="relative">
-                        <input type="search" name="q" placeholder="Search books..." 
+                        <input type="search" name="bookName" placeholder="Search for a book or author..." 
                                class="w-full rounded-md border border-gray-300 bg-transparent py-2 pl-3 pr-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2" />
                     </div>
                 </form>
