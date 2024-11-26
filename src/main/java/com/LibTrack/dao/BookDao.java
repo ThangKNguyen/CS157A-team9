@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.LibTrack.models.Book;
 import com.LibTrack.models.BookDetails;
 import com.LibTrack.utils.DatabaseConn;
 
@@ -211,35 +212,33 @@ public class BookDao {
 	}
 	
 	public String getNameByBookID(int bookID) {
-		loadDriver(dbdriver);
-		Connection con = getConnection();
-		String query = "SELECT Title FROM books WHERE Title = ?";
-		String res = null;
-		try {
-			PreparedStatement ps = con.prepareStatement(query);
-			ps.setInt(1, bookID);
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) { // Check if there is a result
-				res = rs.getString("Title");
-			} else {
-				System.out.println("No Book found with the title: " + bookID);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return res;
+	    String query = "SELECT Title FROM Books WHERE BookID = ?";
+	    String res = null;
 
+	    try (Connection con = DatabaseConn.getConnection(); 
+	         PreparedStatement ps = con.prepareStatement(query)) {
+	        
+	        ps.setInt(1, bookID);
+	        ResultSet rs = ps.executeQuery();
+	        
+	        if (rs.next()) { // Check if there is a result
+	            res = rs.getString("Title");
+	        } else {
+	            System.out.println("No book found with ID: " + bookID);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return res;
 	}
 
 	public String getAuthorName(int authorID) {
 	    String authorName = "";
-	    loadDriver(dbdriver);
-	    Connection con = getConnection();
-	    
 	    String query = "SELECT Name FROM Authors WHERE AuthorID = ?";
-	    
-	    try {
-	        PreparedStatement stmt = con.prepareStatement(query);
+
+	    try (Connection con = DatabaseConn.getConnection(); 
+	         PreparedStatement stmt = con.prepareStatement(query)) {
+	        
 	        stmt.setInt(1, authorID);
 	        ResultSet rs = stmt.executeQuery();
 	        
@@ -248,60 +247,44 @@ public class BookDao {
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
-	    } finally {
-	        try {
-	            if (con != null) con.close();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
 	    }
 	    return authorName;
 	}
-	
+
 	public String getGenreName(int genreID) {
 	    String genreName = "";
-	    loadDriver(dbdriver);
-	    Connection con = getConnection();
-	    
 	    String query = "SELECT GenreName FROM Genres WHERE GenreID = ?";
-	    
-	    try {
-	        PreparedStatement stmt = con.prepareStatement(query);
+
+	    try (Connection con = DatabaseConn.getConnection(); 
+	         PreparedStatement stmt = con.prepareStatement(query)) {
+	        
 	        stmt.setInt(1, genreID);
 	        ResultSet rs = stmt.executeQuery();
+	        
 	        if (rs.next()) {
 	            genreName = rs.getString("GenreName");
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
-	    } finally {
-	        try {
-	            if (con != null) con.close();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
 	    }
 	    return genreName;
 	}
-	
-	// returns a list of books from the database
+
 	public List<Book> searchBooks(String searchParam) {
 	    List<Book> results = new ArrayList<>();
-	    loadDriver(dbdriver);
-	    Connection con = getConnection();
-	    
 	    String query = "SELECT Books.*, Authors.Name FROM Books " +
-	                  "JOIN Authors ON Books.AuthorID = Authors.AuthorID " +
-	                  "WHERE LOWER(Books.Title) LIKE LOWER(?) " +
-	                  "OR LOWER(Authors.Name) LIKE LOWER(?)";
-	                  
-	    try {
-	        PreparedStatement stmt = con.prepareStatement(query);
+	                   "JOIN Authors ON Books.AuthorID = Authors.AuthorID " +
+	                   "WHERE LOWER(Books.Title) LIKE LOWER(?) " +
+	                   "OR LOWER(Authors.Name) LIKE LOWER(?)";
+
+	    try (Connection con = DatabaseConn.getConnection(); 
+	         PreparedStatement stmt = con.prepareStatement(query)) {
+	        
 	        String searchTerm = "%" + searchParam + "%";
 	        stmt.setString(1, searchTerm);
 	        stmt.setString(2, searchTerm);
 	        ResultSet rs = stmt.executeQuery();
-	        
+
 	        while (rs.next()) {
 	            Book book = new Book(
 	                rs.getInt("BookID"),
@@ -312,17 +295,10 @@ public class BookDao {
 	                rs.getString("ISBN"),
 	                rs.getString("Availability")
 	            );
-	            // Store the author name in the request attributes through BookConnection
 	            results.add(book);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
-	    } finally {
-	        try {
-	            if (con != null) con.close();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
 	    }
 	    return results;
 	}

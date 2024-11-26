@@ -89,7 +89,7 @@
                 <div class="p-4 space-y-2">
                     <div class="w-full flex justify-start border border-gray-300 rounded-md p-2 transform transition duration-200 hover:scale-105">
                         <i class="fa-solid fa-magnifying-glass mr-3 mt-1"></i>
-                        <a href="Categories" class="flex-1">Browse Catalog</a>
+                        <a href="BookConnection" class="flex-1">Browse Catalog</a>
                     </div>
                     <div class="w-full flex justify-start border border-gray-300 rounded-md p-2 transform transition duration-200 hover:scale-105">
                         <i class="fa-solid fa-plus mr-3 mt-1"></i>
