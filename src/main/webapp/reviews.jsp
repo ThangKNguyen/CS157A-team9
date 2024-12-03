@@ -23,6 +23,10 @@
 					<div class="bg-white shadow-md rounded-lg overflow-hidden">
 						<div class="p-6">
 							<h2 class="text-xl font-semibold text-gray-800 mb-2">${review.bookTitle}</h2>
+							<div class="flex items-center mb-3">
+								<span class="text-yellow-400 mr-1">★</span> <span
+									class="text-gray-700">${review.rating}</span>
+							</div>
 							<p class="text-sm text-gray-600 mb-4">Reviewed by
 								${review.member} on ${review.reviewDate}</p>
 							<p class="text-gray-700 mb-4 line-clamp-3">${review.reviewText}</p>

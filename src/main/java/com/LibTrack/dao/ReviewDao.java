@@ -12,10 +12,10 @@ import com.LibTrack.utils.DatabaseConn;
 
 public class ReviewDao {
 	public List<ReviewItem> getAllReviews() {
-		String query = "SELECT " + "    Reviews.ReviewID AS reviewId, " + "    Books.Title AS bookTitle, "
-				+ "    Members.Name AS memberName, " + "    Reviews.ReviewDate AS reviewDate, "
-				+ "    Reviews.ReviewText AS reviewText " + "FROM " + "    LibTrack.Reviews " + "JOIN "
-				+ "    LibTrack.Books ON Reviews.BookID = Books.BookID " + "JOIN "
+		String query = "SELECT " + "    Reviews.ReviewID AS reviewId, " + "Reviews.Rating AS rating, "
+				+ "    Books.Title AS bookTitle, " + "    Members.Name AS memberName, "
+				+ "    Reviews.ReviewDate AS reviewDate, " + "    Reviews.ReviewText AS reviewText " + "FROM "
+				+ "    LibTrack.Reviews " + "JOIN " + "    LibTrack.Books ON Reviews.BookID = Books.BookID " + "JOIN "
 				+ "    LibTrack.Members ON Reviews.MemberID = Members.MemberID;";
 
 		List<ReviewItem> reviews = new ArrayList<>();
@@ -23,13 +23,15 @@ public class ReviewDao {
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
 					int reviewId = rs.getInt("reviewId");
+					int rating = rs.getInt("rating");
 					String bookTitle = rs.getString("bookTitle");
 					String memberName = rs.getString("memberName");
 					String reviewDate = rs.getString("reviewDate"); // Consider rs.getDate() if you want a Date object
 					String reviewText = rs.getString("reviewText");
 
 					// Create a new ReviewItem object
-					ReviewItem reviewItem = new ReviewItem(reviewId, bookTitle, memberName, reviewDate, reviewText);
+					ReviewItem reviewItem = new ReviewItem(reviewId, rating, bookTitle, memberName, reviewDate,
+							reviewText);
 
 					// Add it to the list
 					reviews.add(reviewItem);

@@ -1,16 +1,17 @@
 package com.LibTrack.models;
 
 public class ReviewItem {
-	private int reviewId;
+	private int reviewId, rating;
 	private String bookTitle, member, reviewDate, reviewText;
 
 	public ReviewItem() {
 		super();
 	}
 
-	public ReviewItem(int reviewId, String bookTitle, String member, String reviewDate, String reviewText) {
+	public ReviewItem(int reviewId, int rating, String bookTitle, String member, String reviewDate, String reviewText) {
 		super();
 		this.reviewId = reviewId;
+		this.setRating(rating);
 		this.bookTitle = bookTitle;
 		this.member = member;
 		this.reviewDate = reviewDate;
@@ -55,6 +56,14 @@ public class ReviewItem {
 
 	public void setReviewText(String reviewText) {
 		this.reviewText = reviewText;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 
 }
