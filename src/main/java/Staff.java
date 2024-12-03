@@ -1,5 +1,5 @@
 
-public class Staff {
+public class Staff extends Member{
 	private int staffID;
 	private String name, email, password, phone;
 	private String hireDate;
@@ -15,17 +15,24 @@ public class Staff {
 		this.password = password;
 		this.role = role;
 		this.email = email;
-		this.hireDate = date;
 	}
 	
-	public Staff(int id, String name, String password, String role, String email, String date, String phone) {
-		super();
-		this.staffID = id;
+	public Staff(String name, String password, String role, String email, String date, String phone, String address) {
+		super(name, email, password, phone, address);
 		this.name = name;
 		this.password = password;
 		this.role = role;
 		this.email = email;
 		this.hireDate = date;
+		this.phone = phone;
+	}
+	
+	public Staff(String name, String password, String role, String email, String phone, String address) {
+		super(name, email, password, phone, address);
+		this.name = name;
+		this.password = password;
+		this.role = role;
+		this.email = email;
 		this.phone = phone;
 	}
 	
@@ -39,28 +46,12 @@ public class Staff {
 		this.hireDate = date;
 	}
 	
-	public int getID() {
+	public int getStaffId() {
 		return staffID;
 	}
 
-	public void setID(int id) {
+	public void setStaffId(int id) {
 		this.staffID = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 	
 	public String getRole() {
@@ -71,28 +62,44 @@ public class Staff {
 		this.role = role;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public String getHireDate() {
-		return hireDate;
-	}
-
-	public void setHireDate(String date) {
-		this.hireDate = date;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+//	public String getName() {
+//		return name;
+//	}
+//
+//	public void setName(String name) {
+//		this.name = name;
+//	}
+//	
+//	public String getPassword() {
+//		return password;
+//	}
+//
+//	public void setPassword(String password) {
+//		this.password = password;
+//	}
+//
+//	public String getEmail() {
+//		return email;
+//	}
+//
+//	public void setEmail(String email) {
+//		this.email = email;
+//	}
+//	
+//	public String getHireDate() {
+//		return hireDate;
+//	}
+//
+//	public void setHireDate(String date) {
+//		this.hireDate = date;
+//	}
+//
+//	public String getPhone() {
+//		return phone;
+//	}
+//
+//	public void setPhone(String phone) {
+//		this.phone = phone;
+//	}
 	
 }

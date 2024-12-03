@@ -41,9 +41,11 @@ public class StaffRegister extends HttpServlet {
 		String password=request.getParameter("password");
 		String role=request.getParameter("role");
 		String email=request.getParameter("email");
-		String date=request.getParameter("date");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
 		
-		Staff staff = new Staff(name, password, role, email, date);
+		
+		Staff staff = new Staff(name, password, role, email, phone, address);
 		StaffDao srDao = new StaffDao();
 		staff = srDao.insert(staff);
 		if (staff == null) {

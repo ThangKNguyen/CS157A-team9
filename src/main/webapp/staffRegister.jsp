@@ -27,7 +27,7 @@
 		<%
 		}
 		%>
-        <form action="Register" method="post" class="space-y-4">
+        <form action="StaffRegister" method="post" class="space-y-4">
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                 <input type="text" id="name" name="name" required 
@@ -46,23 +46,24 @@
                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
                               focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
             </div>
+             <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+                <input type="tel" id="phone" name="phone" required 
+                       class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
+                              focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+            </div>
             <div>
-            	<button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" data-dropdown-placement="right" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Role<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-					</svg>
-				</button>
-				<a style="display: inline;" class="block text-sm font-medium text-gray-700 pl-20">Selected role: </a>
-				<a id="reflector" style="display: inline;" class="block text-sm font-medium text-gray-700"></a>
-            	<div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-22 dark:bg-gray-700">
-   				<ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-     				<li>
-     					 <button id="librarian" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="reflector.text = 'Librarian'">Librarian</button>
-      				</li>
-      				<li>
-       					 <button id="librarian" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="reflector.text = 'Admin'">Admin</button>
-      				</li>
-    			</ul>
-				</div>
+                <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                <textarea id="address" name="address" rows="3" required 
+                          class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
+                                 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"></textarea>
+            </div>
+            <div>
+  				<select id="role" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" required>
+    				<option disabled hidden selected>Choose a role</option>
+    				<option value="librarian" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Librarian</option>
+    				<option value="admin" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Admin</option>
+  				</select>
             </div>
             <div>
                 <button type="submit" 
@@ -74,7 +75,7 @@
         
         <p class="mt-4 text-center text-sm text-gray-600">
             Already have an account? 
-            <a href="memberLogin.jsp" class="font-medium text-blue-600 hover:text-blue-500">
+            <a href="staffLogin.jsp" class="font-medium text-blue-600 hover:text-blue-500">
                 Login here
             </a>
         </p>

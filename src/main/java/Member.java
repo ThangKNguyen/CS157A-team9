@@ -1,18 +1,21 @@
 
 public class Member {
-	private String name,email,phone,address;
+	private String name,email,password,phone,address;
 
 	public Member() {
 		super();
 	}
 	
-	public Member(String name, String email, String phone, String address) {
+	public Member(String name, String email, String password, String phone, String address) {
 		super();
 		this.name = name;
 		this.email = email;
+		this.password = password;
 		this.phone = phone;
 		this.address = address;
 	}
+	
+	
 
 	public String getName() {
 		return name;
@@ -28,6 +31,14 @@ public class Member {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getPhone() {

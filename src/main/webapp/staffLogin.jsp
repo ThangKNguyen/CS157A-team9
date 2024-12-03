@@ -10,8 +10,7 @@
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
 	<div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-		<h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Login
-			to LibTrack</h2>
+		<h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Staff Login</h2>
 		<%
 		String error = request.getParameter("error");
 		if (error != null && !error.isEmpty()) {
@@ -27,7 +26,7 @@
 		<%
 		}
 		%>
-		<form action="Login" method="post" class="space-y-4">
+		<form action="StaffLogin" method="post" class="space-y-4">
 			<div>
 				<label for="email" class="block text-sm font-medium text-gray-700">Email</label>
 				<input type="email" id="email" name="email" required
@@ -49,7 +48,7 @@
 		</form>
 
 		<p class="mt-4 text-center text-sm text-gray-600">
-			Don't have an account? <a href="memberRegister.jsp"
+			Don't have an account? <a href="staffRegister.jsp"
 				class="font-medium text-blue-600 hover:text-blue-500"> Register
 				here </a>
 		</p>
