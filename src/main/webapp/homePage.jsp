@@ -99,6 +99,10 @@
                         <i class="fa-solid fa-dollar-sign mr-3 mt-1"></i>
                         <a href="Fines" class="flex-1">Pay Fines</a>
                     </div>
+                     <div class="w-full flex justify-start border border-gray-300 rounded-md p-2 transform transition duration-200 hover:scale-105">
+                        <i class="fa-solid fa-clock mr-3 mt-1"></i>
+                        <a href="BorrowingHistory" class="flex-1">Borrowing History</a>
+                    </div>
                 </div>
             </div>
             

@@ -154,7 +154,7 @@
         </div>
         <form action="Fines" method="post" onsubmit="return validateForm()">
             <div class="mb-4">
-                <label for="amount" class="block text-sm font-medium text-gray-700 mb-2">Amount</label>
+                <label for="amount" class="block text-sm font-medium text-gray-700 mb-2">Amount ($)</label>
                 <input type="number" id="amount" name="amount" min="0.01" step="0.01"
                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" 
                        required placeholder="0.00" oninput="updateButtonState()">

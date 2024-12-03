@@ -12,6 +12,22 @@ import com.LibTrack.models.BorrowingHistoryItem;
 import com.LibTrack.utils.DatabaseConn;
 
 public class BorrowingHistoryDao {
+	
+	 public List<Integer> getBorrowedBookIdsByMemberId(int memberId) {
+	        String query = "SELECT BookID FROM Borrowing_History WHERE MemberID = ? AND Status = 'Borrowed'";
+	        List<Integer> bookIds = new ArrayList<>();
+	        try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+	            ps.setInt(1, memberId);
+	            try (ResultSet rs = ps.executeQuery()) {
+	                while (rs.next()) {
+	                    bookIds.add(rs.getInt("BookID"));
+	                }
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return bookIds;
+	    }
 	public List<BorrowingHistoryItem> getBorrowingHistoryByMemberId(int memberId) {
 		String query = "SELECT bh.BorrowID, b.BookID, b.Title, bh.BorrowDate, bh.DueDate, bh.ReturnDate, bh.Status "
 				+ "FROM LibTrack.Borrowing_History bh " + "JOIN Books b ON bh.BookID = b.BookID "
@@ -62,27 +78,70 @@ public class BorrowingHistoryDao {
 	}
 
 	public boolean markBookAsReturned(int borrowId) {
-		String query = "UPDATE LibTrack.Borrowing_History SET Status = 'Returned', ReturnDate = CURRENT_DATE WHERE BorrowID = ?";
+	    String markReturnedQuery = "UPDATE Borrowing_History SET Status = 'Returned', ReturnDate = CURRENT_DATE WHERE BorrowID = ?";
+	    String checkReservationQuery = "SELECT MemberID FROM Reservations WHERE BookID = ? AND Status = 'Active'";
+	    String fulfillReservationQuery = "UPDATE Reservations SET Status = 'Fulfilled' WHERE BookID = ? AND MemberID = ?";
+	    String createBorrowingRecordQuery = "INSERT INTO Borrowing_History (BookID, MemberID, BorrowDate, DueDate, Status) "
+	            + "VALUES (?, ?, CURRENT_DATE, DATE_ADD(CURRENT_DATE, INTERVAL 14 DAY), 'Borrowed')";
+	    String updateBookAvailabilityQuery = "UPDATE Books SET Availability = 'Borrowed' WHERE BookID = ?";
+	    String getBookIdQuery = "SELECT BookID FROM Borrowing_History WHERE BorrowID = ?";
 
-		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+	    try (Connection con = DatabaseConn.getConnection();
+	         PreparedStatement markReturnedStmt = con.prepareStatement(markReturnedQuery);
+	         PreparedStatement checkReservationStmt = con.prepareStatement(checkReservationQuery);
+	         PreparedStatement fulfillReservationStmt = con.prepareStatement(fulfillReservationQuery);
+	         PreparedStatement createBorrowingRecordStmt = con.prepareStatement(createBorrowingRecordQuery);
+	         PreparedStatement updateBookAvailabilityStmt = con.prepareStatement(updateBookAvailabilityQuery);
+	         PreparedStatement getBookIdStmt = con.prepareStatement(getBookIdQuery)) {
 
-			// Set the borrowId parameter in the query
-			ps.setInt(1, borrowId);
+	        // Step 1: Get the BookID for the borrow record
+	        getBookIdStmt.setInt(1, borrowId);
+	        int bookId = -1;
+	        try (ResultSet rs = getBookIdStmt.executeQuery()) {
+	            if (rs.next()) {
+	                bookId = rs.getInt("BookID");
+	            } else {
+	                return false; // BookID not found
+	            }
+	        }
 
-			// Execute the update query
-			int rowsAffected = ps.executeUpdate();
+	        // Step 2: Mark the book as returned
+	        markReturnedStmt.setInt(1, borrowId);
+	        markReturnedStmt.executeUpdate();
 
-			// If at least one row was updated, return true
-			if (rowsAffected > 0) {
-				return true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	        // Step 3: Check if the book is reserved
+	        checkReservationStmt.setInt(1, bookId);
+	        int reservedMemberId = -1;
+	        try (ResultSet rs = checkReservationStmt.executeQuery()) {
+	            if (rs.next()) {
+	                reservedMemberId = rs.getInt("MemberID");
+	            }
+	        }
 
-		// Return false if the update failed
-		return false;
+	        if (reservedMemberId != -1) {
+	            // Step 4: Fulfill the reservation
+	            fulfillReservationStmt.setInt(1, bookId);
+	            fulfillReservationStmt.setInt(2, reservedMemberId);
+	            fulfillReservationStmt.executeUpdate();
+
+	            // Step 5: Create a borrowing record for the reserved member
+	            createBorrowingRecordStmt.setInt(1, bookId);
+	            createBorrowingRecordStmt.setInt(2, reservedMemberId);
+	            createBorrowingRecordStmt.executeUpdate();
+
+	            // Step 6: Update the book availability to "Borrowed"
+	            updateBookAvailabilityStmt.setInt(1, bookId);
+	            updateBookAvailabilityStmt.executeUpdate();
+	        }
+
+	        return true; // Operation completed successfully
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false; // Return false if any operation fails
+	    }
 	}
+
 
 	public boolean createBorrowingRecord(int memberId, int bookId, Date dueDate) {
 		String query = "INSERT INTO LibTrack.Borrowing_History (BookID, MemberID, BorrowDate, DueDate, Status) "
@@ -108,5 +167,7 @@ public class BorrowingHistoryDao {
 		// Return false if the insertion failed
 		return false;
 	}
+	
+	
 
 }
