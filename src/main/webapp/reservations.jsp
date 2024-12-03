@@ -27,13 +27,18 @@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Book Title</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reservation Date</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             <c:forEach var="item" items="${reservations}">
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><c:out value="${item.bookTitle}" /></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><c:out value="${item.reservationDate}"/></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        <c:out value="${item.bookTitle}" />
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <c:out value="${item.reservationDate}" />
+                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
                                             ${item.status == 'Active' ? 'bg-orange-100 text-orange-800' : 
@@ -41,6 +46,14 @@
                                               'bg-yellow-100 text-yellow-800'}">
                                             <c:out value="${item.status}" />
                                         </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <c:if test="${item.status == 'Active'}">
+                                            <button 
+                                                class="px-2 py-1 text-xs text-white bg-red-500 rounded hover:bg-red-600">
+                                                Cancel
+                                            </button>
+                                        </c:if>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -52,3 +65,4 @@
     </div>
 </body>
 </html>
+
