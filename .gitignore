@@ -1,2 +1,9 @@
+/build/
 .DS_Store
+<<<<<<< HEAD
+=======
+.classpath
+.project
+.settings/
+>>>>>>> main
 /bin/
