@@ -72,11 +72,12 @@
         </div>
 
         <!-- Image Placeholder -->
-        <div class="w-full md:w-1/2 flex justify-center items-center px-6">
-            <div class="w-full h-64 md:h-80 bg-gray-300 rounded-lg flex items-center justify-center">
-                <span class="text-gray-500 text-xl">Image Placeholder</span>
-            </div>
-        </div>
+       <div class="w-full md:w-1/2 flex justify-center items-center px-6">
+    <div class="w-full h-64 md:h-80">
+        <img src="./library.jpg" alt="Library" class="w-full h-full object-cover rounded-lg" />
+    </div>
+</div>
+       
     </div>
 </section>
 
