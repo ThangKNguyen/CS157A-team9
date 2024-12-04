@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//import com.LibTrack.dao.StaffDao;
-//import com.LibTrack.models.Staff;
+import com.LibTrack.dao.StaffDao;
+import com.LibTrack.models.Staff;
 
 /**
  * Servlet implementation class StaffRegister
