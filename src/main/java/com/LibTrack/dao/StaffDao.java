@@ -30,7 +30,7 @@ public class StaffDao {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 		String sql2 = "insert into LibTrack.Members (Name, Email, Password, PhoneNumber, Address, JoinDate) VALUES(?, ?, ?, ?, ?)";
 		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, staff.getName());
@@ -44,7 +44,7 @@ public class StaffDao {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 		return staff;
 	}
 
@@ -54,8 +54,8 @@ public class StaffDao {
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				Staff staff = new Staff(rs.getInt("StaffID"), rs.getString("Name"),
-						rs.getString("Password"),rs.getString("Role"), rs.getString("Email"), rs.getString("HireDate"));
+				Staff staff = new Staff(rs.getInt("StaffID"), rs.getString("Name"), rs.getString("Password"),
+						rs.getString("Role"), rs.getString("Email"), rs.getString("HireDate"));
 				return staff;
 			}
 		} catch (SQLException e) {
@@ -65,27 +65,21 @@ public class StaffDao {
 	}
 
 	public Staff validateStaff(String email, String password) {
-	    String query = "SELECT * FROM LibTrack.Staff WHERE Email = ? AND Password = ?";
+		String query = "SELECT * FROM LibTrack.Staff WHERE Email = ? AND Password = ?";
 
-	    try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
-	        ps.setString(1, email);
-	        ps.setString(2, password);
-	        ResultSet rs = ps.executeQuery();
-	        if (rs.next()) {
-	            Staff staff = new Staff(
-	                rs.getInt("StaffID"),
-	                rs.getString("Name"),
-	                rs.getString("Password"),
-	                rs.getString("Role"),
-	                rs.getString("Email"),
-	                rs.getString("HireDate")
-	            );
-	            return staff;
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	    return null;
+		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+			ps.setString(1, email);
+			ps.setString(2, password);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				Staff staff = new Staff(rs.getInt("StaffID"), rs.getString("Name"), rs.getString("Password"),
+						rs.getString("Role"), rs.getString("Email"), rs.getString("HireDate"));
+				return staff;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

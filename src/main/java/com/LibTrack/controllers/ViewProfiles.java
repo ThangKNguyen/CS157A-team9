@@ -1,7 +1,6 @@
 package com.LibTrack.controllers;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -66,49 +65,46 @@ public class ViewProfiles extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	        throws ServletException, IOException {
-	    HttpSession session = request.getSession(false);
-	    if (session == null || session.getAttribute("loggedInUser") == null) {
-	        response.sendRedirect("staffLogin.jsp");
-	        return;
-	    }
+			throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("loggedInUser") == null) {
+			response.sendRedirect("staffLogin.jsp");
+			return;
+		}
 
-	    Member member = (Member) session.getAttribute("loggedInUser");
-	    if (member == null) {
-	        response.sendRedirect("staffLogin.jsp");
-	        return;
-	    }
+		Member member = (Member) session.getAttribute("loggedInUser");
+		if (member == null) {
+			response.sendRedirect("staffLogin.jsp");
+			return;
+		}
 
-	    try {
-	        // Add/remove members
-	        MemberDao memberDao = new MemberDao();
-	        
-	        String memberName = request.getParameter("name");
-	        int memberID = Integer.valueOf(request.getParameter("memberId"));
-	        
-	        // if have name then add
-	        if (!(memberID>0)) {
-	        	request.setAttribute("error", "member not found");
-	        	request.getRequestDispatcher("viewProfiles.jsp").forward(request, response);
-	            return;
-	        } else if(memberName==null) { // if have id and no name, remove
-	        	
-	        } else {
-	        	Member newMember = new Member(
-	        			request.getParameter("name"),
-	        			request.getParameter("email"),
-	        			request.getParameter("password"),
-	        			request.getParameter("phone"),
-	        			request.getParameter("address"));
-	        	memberDao.insert(newMember);
-	        }
+		try {
+			// Add/remove members
+			MemberDao memberDao = new MemberDao();
 
-	        // Redirect to avoid form resubmission issue
-	        response.sendRedirect("viewProfiles");
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        throw new ServletException("Error adding or removing members", e);
-	    }
+			String memberName = request.getParameter("name");
+			int memberID = Integer.valueOf(request.getParameter("memberId"));
+
+			// if have name then add
+			if (!(memberID > 0)) {
+				request.setAttribute("error", "member not found");
+				request.getRequestDispatcher("viewProfiles.jsp").forward(request, response);
+				return;
+			} else if (memberName == null) { // if have id and no name, remove
+
+			} else {
+				Member newMember = new Member(request.getParameter("name"), request.getParameter("email"),
+						request.getParameter("password"), request.getParameter("phone"),
+						request.getParameter("address"));
+				memberDao.insert(newMember);
+			}
+
+			// Redirect to avoid form resubmission issue
+			response.sendRedirect("viewProfiles");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServletException("Error adding or removing members", e);
+		}
 	}
 
 }
