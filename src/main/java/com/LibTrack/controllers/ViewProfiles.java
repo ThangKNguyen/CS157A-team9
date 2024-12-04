@@ -49,7 +49,7 @@ public class ViewProfiles extends HttpServlet {
 		try {
 			MemberDao memberDao = new MemberDao();
 			// Get list of members using memberDAO
-			List<Member> members = memberDao.getMembers(memberId);
+			List<Member> members = memberDao.getMembers();
 
 			// Set the borrowing history as a request attribute and forward to JSP
 			request.setAttribute("members", members);

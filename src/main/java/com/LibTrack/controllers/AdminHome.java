@@ -15,6 +15,7 @@ import com.LibTrack.models.BookDetails;
 import com.LibTrack.models.BorrowingHistoryItem;
 import com.LibTrack.models.FineItem;
 import com.LibTrack.models.Member;
+import com.LibTrack.models.Staff;
 import com.LibTrack.dao.*;
 
 /**
@@ -54,7 +55,7 @@ public class AdminHome extends HttpServlet {
 			request.getRequestDispatcher("adminHome.jsp").forward(request, response);
 			
 		} catch (Exception e) {
-			throw new ServletException("Error retrieving fines", e);
+			throw new ServletException("Error retrieving staff", e);
 		}
 		
 	}

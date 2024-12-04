@@ -1,3 +1,4 @@
+package com.LibTrack.models;
 
 public class Staff extends Member{
 	private int staffID;
@@ -6,11 +7,11 @@ public class Staff extends Member{
 	private String role;
 
 	public Staff() {
-		super();
+		super(null, null, null, null, null);
 	}
 	
 	public Staff(String name, String password, String role, String email, String date) {
-		super();
+		super(name, email, password, "", "");
 		this.name = name;
 		this.password = password;
 		this.role = role;
@@ -37,7 +38,7 @@ public class Staff extends Member{
 	}
 	
 	public Staff(int id, String name, String password, String role, String email, String date) {
-		super();
+		super(name, email, password, "", "");
 		this.staffID = id;
 		this.name = name;
 		this.password = password;
