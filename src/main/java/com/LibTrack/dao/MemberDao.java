@@ -6,6 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+<<<<<<< HEAD
+import java.util.ArrayList;
+import java.util.List;
+=======
+>>>>>>> main
 
 import com.LibTrack.models.Member;
 import com.LibTrack.utils.DatabaseConn;
@@ -32,6 +37,30 @@ public class MemberDao {
 		}
 		return member;
 	}
+<<<<<<< HEAD
+	
+	public List<Member> getMembers() {
+		String query = "SELECT * FROM LibTrack.Members WHERE MemberID = ?";
+		List<Member> members = new ArrayList<>();
+		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				String name = rs.getString("Name");
+				String email = rs.getString("Email");
+				String password = rs.getString("Password");
+				String phone = rs.getString("PhoneNumber");
+				String address = rs.getString("Address");
+				String date = rs.getString("JoinDate");
+				members.add(new Member(name, email, password, phone, address, date));
+				return members;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+=======
+>>>>>>> main
 
 	public Member getMemberById(int id) {
 		String query = "SELECT * FROM LibTrack.Members WHERE MemberID = ?";
