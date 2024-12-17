@@ -67,7 +67,7 @@ public class StaffRegister extends HttpServlet {
 
 			// Adding a JavaScript to redirect the user after a delay (e.g., 5 seconds)
 			out.println("<script type='text/javascript'>");
-			out.println("setTimeout(function(){ window.location.href = 'memberLogin.jsp'; }, 1500);");
+			out.println("setTimeout(function(){ window.location.href = 'staffLogin.jsp'; }, 1500);");
 			out.println("</script>");
 
 			out.println("</head>");

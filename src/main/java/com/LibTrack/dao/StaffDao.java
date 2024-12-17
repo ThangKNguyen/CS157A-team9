@@ -17,28 +17,28 @@ public class StaffDao {
 		LocalDate currentDate = LocalDate.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String formattedDate = currentDate.format(formatter);
-		String sql = "insert into LibTrack.Staff (Name, Email, Password, PhoneNumber, Role, HireDate) VALUES(?, ?, ?, ?, ?)";
+		String sql = "insert into LibTrack.Staff (Name, Role, Email, HireDate, PhoneNumber, Password) VALUES(?, ?, ?, ?, ?, ?)";
 		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, staff.getName());
-			ps.setString(4, staff.getEmail());
-			ps.setString(2, staff.getPassword());
-			ps.setString(4, staff.getPhone());
-			ps.setString(3, staff.getRole());
-			ps.setString(5, formattedDate);
+			ps.setString(2, staff.getRole());
+			ps.setString(3, staff.getEmail());
+			ps.setString(4, formattedDate);
+			ps.setString(5, staff.getPhone());
+			ps.setString(6, staff.getPassword());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
 
-		String sql2 = "insert into LibTrack.Members (Name, Email, Password, PhoneNumber, Address, JoinDate) VALUES(?, ?, ?, ?, ?)";
-		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+		String sql2 = "insert into LibTrack.Members (Name, Email, Password, PhoneNumber, Address, JoinDate) VALUES(?, ?, ?, ?, ?, ?)";
+		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(sql2)) {
 			ps.setString(1, staff.getName());
-			ps.setString(4, staff.getEmail());
-			ps.setString(2, staff.getPassword());
+			ps.setString(2, staff.getEmail());
+			ps.setString(3, staff.getPassword());
 			ps.setString(4, staff.getPhone());
-			ps.setString(3, staff.getAddress());
-			ps.setString(5, formattedDate);
+			ps.setString(5, staff.getAddress());
+			ps.setString(6, formattedDate);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

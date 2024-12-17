@@ -53,6 +53,10 @@
 				class="font-medium text-blue-600 hover:text-blue-500"> Register
 				here </a>
 		</p>
+		<p class="mt-4 text-center text-sm text-gray-600">
+			Staff Member? <a href="staffLogin.jsp"
+				class="font-medium text-blue-600 hover:text-blue-500"> Log in here </a>
+		</p>
 	</div>
 </body>
 </html>

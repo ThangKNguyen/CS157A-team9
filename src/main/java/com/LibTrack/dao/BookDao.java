@@ -9,9 +9,59 @@ import java.util.List;
 
 import com.LibTrack.models.Book;
 import com.LibTrack.models.BookDetails;
+import com.LibTrack.models.Member;
 import com.LibTrack.utils.DatabaseConn;
 
 public class BookDao {
+	
+	public Book insert(Book book) {
+		
+
+		String sql = "insert into LibTrack.Books (Title, ISBN, AuthorID, CategoryID, GenreID, Availability) VALUES(?, ?, ?, ?, ?, ?)";
+		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setString(1, book.getTitle());
+			ps.setString(2, book.getISBN());
+			ps.setInt(3, book.getAuthorId());
+			ps.setInt(4, book.getCategoryId());
+			ps.setInt(5, book.getGenreId());
+			ps.setString(6, book.getAvailability());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return book;
+	}
+	
+	public Book removeBookByISBN(int isbn) {
+		String sql = "DELETE FROM LibTrack.Books WHERE ISBN = ?";
+		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, isbn);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Book update(Book book) {
+		
+		String sql = "UPDATE LibTrack.Books SET Title = ?,  AuthorID = ?, CategoryID = ?, GenreID = ?, Availability = ? WHERE BookID = ?";
+		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setString(1, book.getTitle());
+			ps.setInt(2, book.getAuthorId());
+			ps.setInt(3, book.getCategoryId());
+			ps.setInt(4, book.getGenreId());
+			ps.setString(5, book.getAvailability());
+			//String tuah = getBookIDByISBN(book.getISBN());
+			ps.setString(6, getBookIDByISBN(book.getISBN()));
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return book;
+	}
 
 	public List<BookDetails> getBookDetailsByCategory(int categoryId) {
 		List<BookDetails> books = new ArrayList<>();
@@ -225,6 +275,27 @@ public class BookDao {
 	            res = rs.getString("Title");
 	        } else {
 	            System.out.println("No book found with ID: " + bookID);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return res;
+	}
+	
+	public String getBookIDByISBN(String isbn) {
+	    String query = "SELECT BookID FROM Books WHERE ISBN = ?";
+	    String res = null;
+
+	    try (Connection con = DatabaseConn.getConnection(); 
+	         PreparedStatement ps = con.prepareStatement(query)) {
+	        
+	        ps.setString(1, isbn);
+	        ResultSet rs = ps.executeQuery();
+	        
+	        if (rs.next()) { // Check if there is a result
+	            res = rs.getString("BookID");
+	        } else {
+	            System.out.println("No book found with ISBN: " + isbn);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();

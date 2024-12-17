@@ -55,6 +55,28 @@ public class MemberDao {
 		}
 		return null;
 	}
+	
+	public List<Member> getMembersWithId() {
+		String query = "SELECT * FROM LibTrack.Members";
+		List<Member> members = new ArrayList<>();
+		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				int memberId = rs.getInt("MemberID");
+				String name = rs.getString("Name");
+				String email = rs.getString("Email");
+				String password = rs.getString("Password");
+				String phone = rs.getString("PhoneNumber");
+				String address = rs.getString("Address");
+				String date = rs.getString("JoinDate");
+				members.add(new Member(memberId, name, email, password, phone, address, date));
+			}
+			return members;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public Member getMemberById(int id) {
 		String query = "SELECT * FROM LibTrack.Members WHERE MemberID = ?";
@@ -72,6 +94,18 @@ public class MemberDao {
 		}
 		return null;
 	}
+	
+	public Member removeMemberById(int id) {
+		String sql = "DELETE FROM LibTrack.Members WHERE MemberID = ?";
+		try (Connection con = DatabaseConn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, id);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 
 	public Member validateMember(String email, String password) {
 		String query = "SELECT * FROM LibTrack.Members WHERE Email = ? AND Password = ?";

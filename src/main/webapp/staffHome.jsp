@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%--  <jsp:include page="header.jsp"/> --%>
+<jsp:include page="staffHeader.jsp"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +38,7 @@
         <div class="bg-white shadow-md rounded-lg p-6">
             <h2 class="text-2xl font-semibold text-gray-700 mb-4">Librarian Options</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <a href="ViewProfiles" class="block p-4 bg-indigo-300 rounded-lg hover:bg-gray-200 transition duration-300">
+                <a href="ViewBooks" class="block p-4 bg-indigo-300 rounded-lg hover:bg-gray-200 transition duration-300">
                     <h3 class="text-lg font-semibold text-white-800 mb-2">Manage books</h3>
                     <p class="text-sm text-white-600">Add or remove books</p>
                 </a>

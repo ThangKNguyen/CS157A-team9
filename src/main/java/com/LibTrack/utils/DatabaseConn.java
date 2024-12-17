@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DatabaseConn {
 	private static String dburl = "jdbc:mysql://localhost:3306/LibTrack";
 	private static String dbuname = "root";
-	private static String dbpassword = "CS157A@SJSU";
+	private static String dbpassword = "MP5wL+r+L"; //CS157A@SJSU
 
 	static {
 		try {

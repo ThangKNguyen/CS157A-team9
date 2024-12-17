@@ -48,9 +48,9 @@ public class ViewProfiles extends HttpServlet {
 		try {
 			MemberDao memberDao = new MemberDao();
 			// Get list of members using memberDAO
-			List<Member> members = memberDao.getMembers();
+			List<Member> members = memberDao.getMembersWithId();
 
-			// Set the borrowing history as a request attribute and forward to JSP
+			// Set the list of members as a request attribute and forward to JSP
 			request.setAttribute("members", members);
 			request.getRequestDispatcher("viewProfiles.jsp").forward(request, response);
 		} catch (Exception e) {
@@ -81,26 +81,27 @@ public class ViewProfiles extends HttpServlet {
 		try {
 			// Add/remove members
 			MemberDao memberDao = new MemberDao();
-
-			String memberName = request.getParameter("name");
-			int memberID = Integer.valueOf(request.getParameter("memberId"));
-
-			// if have name then add
-			if (!(memberID > 0)) {
-				request.setAttribute("error", "member not found");
-				request.getRequestDispatcher("viewProfiles.jsp").forward(request, response);
-				return;
-			} else if (memberName == null) { // if have id and no name, remove
-
-			} else {
+			
+			// if has name then is add request, if has member id then is remove request
+			if (request.getParameter("name") != null) {
 				Member newMember = new Member(request.getParameter("name"), request.getParameter("email"),
 						request.getParameter("password"), request.getParameter("phone"),
 						request.getParameter("address"));
 				memberDao.insert(newMember);
+			} else if (request.getParameter("memberId") != null) {
+				int memberID = Integer.valueOf(request.getParameter("memberId"));
+				
+				if (memberID > 0) {
+					memberDao.removeMemberById(Integer.valueOf(request.getParameter("memberId")));
+				} else {
+					request.setAttribute("error", "member not found");
+					request.getRequestDispatcher("viewProfiles.jsp").forward(request, response);
+					return;
+				}
 			}
 
 			// Redirect to avoid form resubmission issue
-			response.sendRedirect("viewProfiles");
+			response.sendRedirect("ViewProfiles");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServletException("Error adding or removing members", e);

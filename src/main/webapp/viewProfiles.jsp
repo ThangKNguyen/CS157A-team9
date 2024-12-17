@@ -2,7 +2,7 @@
 <%@ page session="true" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%--  <jsp:include page="header.jsp"/> --%>
+<jsp:include page="adminHeader.jsp" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,17 +32,30 @@
         const address = document.getElementById('address').value.trim();
         const memberId = document.getElementById('memberId').value.trim();
 
-        const button = document.getElementById('confirmButton');
-        const allFieldsFilled = name && email && password && phone && address;
+        const addButton = document.getElementById('confirmAddButton');
+        const addFieldsFilled = name && email && password && phone && address;
+        
+        const removeButton = document.getElementById('confirmRemoveButton');
+        const removeFieldsFilled = !!memberId;
 
-        if (allFieldsFilled) {
-            button.classList.remove('bg-blue-400');
-            button.classList.add('bg-blue-600');
-            button.disabled = false;
+        if (addFieldsFilled) {
+            addButton.classList.remove('bg-blue-400');
+            addButton.classList.add('bg-blue-600');
+            addButton.disabled = false;
         } else {
-            button.classList.remove('bg-blue-600');
-            button.classList.add('bg-blue-400');
-            button.disabled = true;
+        	addButton.classList.remove('bg-blue-600');
+        	addButton.classList.add('bg-blue-400');
+        	addButton.disabled = true;
+        }
+        
+        if (removeFieldsFilled) {
+        	removeButton.classList.remove('bg-blue-400');
+        	removeButton.classList.add('bg-blue-600');
+        	removeButton.disabled = false;
+        } else {
+        	removeButton.classList.remove('bg-blue-600');
+        	removeButton.classList.add('bg-blue-400');
+        	removeButton.disabled = true;
         }
     }
     </script>
@@ -60,6 +73,7 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Member ID</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">E-mail</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Password</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone Number</th>
@@ -72,6 +86,9 @@
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                         <c:out value="${member.name}" />
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        <c:out value="${member.memberId}" />
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                         <c:out value="${member.email}" />
@@ -125,7 +142,7 @@
             <h2 class="text-lg font-bold text-gray-800">Add a new user</h2>
             <p class="text-sm text-gray-600 mt-1">Enter user information below.</p>
         </div>
-        <form action="viewProfiles" method="post">
+        <form action="ViewProfiles" method="post">
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
                 <input type="text" id="name" name="name"
@@ -160,7 +177,7 @@
                 <button type="button" onclick="toggleAddPopup()" class="bg-gray-500 text-white px-4 py-2 rounded-lg mr-2 hover:bg-black">
                     Cancel
                 </button>
-                <button id="confirmButton" type="submit" class="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-700" disabled>
+                <button id="confirmAddButton" type="submit" class="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-700" disabled>
                     Confirm
                 </button>
             </div>
@@ -174,7 +191,7 @@
             <h2 class="text-lg font-bold text-gray-800">Remove a user</h2>
             <p class="text-sm text-gray-600 mt-1">Enter user ID below</p>
         </div>
-        <form action="viewProfiles" method="post">
+        <form action="ViewProfiles" method="post">
             <div class="mb-4">
                 <label for="memberId" class="block text-sm font-medium text-gray-700 mb-2">Member ID</label>
                 <input type="number" id="memberId" name="memberId"
@@ -185,7 +202,7 @@
                 <button type="button" onclick="toggleRemovePopup()" class="bg-gray-500 text-white px-4 py-2 rounded-lg mr-2 hover:bg-black">
                     Cancel
                 </button>
-                <button id="confirmButton" type="submit" class="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-700" disabled>
+                <button id="confirmRemoveButton" type="submit" class="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-700" disabled>
                     Confirm
                 </button>
             </div>
