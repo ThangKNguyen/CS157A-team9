@@ -279,7 +279,7 @@
                 <label for="updateAvailability" class="block text-sm font-medium text-gray-700 mb-2">Availability</label>
                 <input type="text" id="updateAvailability" name="updateAvailability"
                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" 
-                       required placeholder="Available, Borrowed, Returned" oninput="updateButtonState()">
+                       required placeholder="Available, Borrowed, or Reserved" oninput="updateButtonState()">
             </div>
             <div class="flex justify-end">
                 <button type="button" onclick="toggleUpdatePopup()" class="bg-gray-500 text-white px-4 py-2 rounded-lg mr-2 hover:bg-black">
