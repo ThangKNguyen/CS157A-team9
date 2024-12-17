@@ -100,9 +100,6 @@ public class ViewBooks extends HttpServlet {
 			String category;
 			String genre;
 			
-//			String author = request.getParameter("author");
-//			String category = request.getParameter("category");
-//			String genre = request.getParameter("genre");
 			
 			int authorId = -1;
 			int categoryId = -1;
@@ -115,38 +112,6 @@ public class ViewBooks extends HttpServlet {
 			List<Author> authors = authorDao.getAllAuthors();
 			List<Category> categories = categoryDao.getAllCategories();
 			List<Genre> genres = genreDao.getAllGenres();
-			
-//			for(Author a:authors) {
-//				if (a.getName().equals(author)) {
-//					authorId = a.getId();
-//				}
-//			}
-//			
-//			for(Category c:categories) {
-//				if (c.getName().equals(category)) {
-//					categoryId = c.getId();
-//				}
-//			}
-//			
-//			for(Genre g:genres) {
-//				if (g.getName().equals(genre)) {
-//					genreId = g.getId();
-//				}
-//			}
-			
-//			if (authorId == -1) {
-//				request.setAttribute("error", "author not found");
-//				request.getRequestDispatcher("viewBooks.jsp").forward(request, response);
-//				return;
-//			} else if (categoryId == -1) {
-//				request.setAttribute("error", "category not found");
-//				request.getRequestDispatcher("viewBooks.jsp").forward(request, response);
-//				return;
-//			} else if (genreId == -1) {
-//				request.setAttribute("error", "genre not found");
-//				request.getRequestDispatcher("viewBooks.jsp").forward(request, response);
-//				return;
-//			}
 			
 
 			// if have title then add/update
@@ -225,14 +190,6 @@ public class ViewBooks extends HttpServlet {
 					return;
 				}
 			} 
-			
-//			else if (request.getParameter("updateTitle") != null) {
-//				Book newBook = new Book(0, request.getParameter("title"), authorId,
-//						categoryId, genreId,
-//						request.getParameter("isbn"), request.getParameter("updateAvailability"));
-//				
-//				bookDao.update(newBook);
-//			}
 
 			// Redirect to avoid form resubmission issue
 			response.sendRedirect("ViewBooks");

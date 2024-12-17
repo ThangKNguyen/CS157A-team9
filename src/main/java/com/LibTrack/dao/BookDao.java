@@ -53,7 +53,6 @@ public class BookDao {
 			ps.setInt(3, book.getCategoryId());
 			ps.setInt(4, book.getGenreId());
 			ps.setString(5, book.getAvailability());
-			//String tuah = getBookIDByISBN(book.getISBN());
 			ps.setString(6, getBookIDByISBN(book.getISBN()));
 			ps.executeUpdate();
 		} catch (SQLException e) {
