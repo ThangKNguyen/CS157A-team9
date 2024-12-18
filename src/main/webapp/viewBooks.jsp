@@ -185,13 +185,13 @@
                 <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Category</label>
                 <input type="text" id="category" name="category" minlength="6"
                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" 
-                       required placeholder="ex: Non-Fiction" oninput="updateButtonState()">
+                       required placeholder="ex: Fantasy" oninput="updateButtonState()">
             </div>
             <div class="mb-4">
                 <label for="genre" class="block text-sm font-medium text-gray-700 mb-2">Genre</label>
                 <input type="text" id="genre" name="genre"
                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" 
-                       required placeholder="ex: Fantasy" oninput="updateButtonState()">
+                       required placeholder="ex: Dystopian" oninput="updateButtonState()">
             </div>
             <div class="mb-4">
                 <label for="isbn" class="block text-sm font-medium text-gray-700 mb-2">ISBN</label>
@@ -267,13 +267,13 @@
                 <label for="updateCategory" class="block text-sm font-medium text-gray-700 mb-2">Category</label>
                 <input type="text" id="updateCategory" name="updateCategory" minlength="6"
                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" 
-                       required placeholder="ex: Non-Fiction" oninput="updateButtonState()">
+                       required placeholder="ex: Fantasy" oninput="updateButtonState()">
             </div>
             <div class="mb-4">
                 <label for="updateGenre" class="block text-sm font-medium text-gray-700 mb-2">Genre</label>
                 <input type="text" id="updateGenre" name="updateGenre"
                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" 
-                       required placeholder="ex: Fantasy" oninput="updateButtonState()">
+                       required placeholder="ex: Dystopian" oninput="updateButtonState()">
             </div>
             <div class="mb-4">
                 <label for="updateAvailability" class="block text-sm font-medium text-gray-700 mb-2">Availability</label>
